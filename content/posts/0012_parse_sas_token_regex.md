@@ -1,5 +1,5 @@
 ---
-title: "0012_parse_sas_token_regex"
+title: Parse Azure SAS token using regular expression
 date: 2023-02-03T20:40:37-07:00
 tags: ["azure", "azure security"]
 ---
