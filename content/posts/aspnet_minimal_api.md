@@ -4,7 +4,7 @@ date: 2022-12-19T19:15:28-07:00
 tags: ["asp.net"]
 ---
 
-## Why this post?
+## Why this post?  
 Looking at the new ASP.NET 6 and its minimal hosting model, triggered some thoughts comparing it to ASP.NET 2, and made me think if Microsoft going back to some old concepts. And was questioning the real benefits of migrating to this model.
 So let me explain, and compare it with ASP.NET version 5 and 2.
 
