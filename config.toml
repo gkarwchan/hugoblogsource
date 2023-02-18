@@ -1,6 +1,6 @@
 baseURL = 'http://www.ghassan.page/'
 languageCode = 'en-us'
-title = 'Ghassan Blog'
+title = 'Ghassan Page'
 theme = 'puppet'
 
 copyright = ""
@@ -62,7 +62,7 @@ weight = 50
 [[menu.main]]
 identifier = "github"
 name = "Github"
-url = "https://github.com/roninro/hugo-theme-puppet/"
+url = "https://github.com/gkarwchan/hugoblogsource"
 weight = 100
 
 
