@@ -1,6 +1,6 @@
 ---
 title: Use Azure Key Vault to retrieve secured parameters during  Azure deployment.
-date: 2023-02-03T20:42:03-07:00
+date: 2023-02-04T20:42:03-07:00
 tags: ["azure", "ci/cd"]
 ---
 

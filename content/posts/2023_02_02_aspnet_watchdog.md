@@ -1,6 +1,6 @@
 ---
 title: Implement a watchdog for your microservices using off-the-shelf ASP.Net Healthcheck UI.
-date: 2023-02-01T20:22:20-07:00
+date: 2023-02-02T20:22:20-07:00
 tags: ["asp.net", "azure", "aks"]
 ---
 
