@@ -94,11 +94,17 @@ rss = true
 # See https://giscus.app/
 [params.giscus]
 enable = true
-repo = "roninro/hugo-theme-puppet"
-repo_id = "R_kgDOHuvyhw"
+repo = "gkarwchan/hugoblog"
+repo_id = "R_kgDOI9C7aQ"
 category = "General"
-category_id = "DIC_kwDOHuvyh84CQjDo"
+category_id = "DIC_kwDOI9C7ac4CUTNT"
 input_position = "top"
 theme = "light_tritanopia"
 lang = "en"
+mapping = "pathname"
+strict = "0"
+reactions-enabled = "1"
+emit-metadata = "0"
+input-position = "bottom"
+
 

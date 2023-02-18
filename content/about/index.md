@@ -1,8 +1,10 @@
----
-title: "About Me"
-date: 2011-02-10T19:51:56-07:00
----
-
++++
+title = "About"
+description = "Hugo, the world's fastest framework for building websites"
+date = "2019-02-28"
+aliases = ["about-us", "about-hugo", "contact"]
+author = "Hugo Authors"
++++
 
 
 Hi, my name is Ghassan Karwchan.  
