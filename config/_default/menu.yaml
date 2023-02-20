@@ -1,0 +1,17 @@
+main:
+  - identifier: "home"
+    name: "Home"
+    url: "/"
+    weight: -100
+  - identifier: "archive"
+    name: "Archive"
+    url: "/archive/"
+    weight: 10
+  - identifier: "about"
+    name: "About"
+    url: "/about/"
+    weight: 50
+  - identifier: "github"
+    name: "Github"
+    url: "https://github.com/gkarwchan/hugoblogsource"
+    weight: 100

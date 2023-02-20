@@ -1,7 +1,7 @@
 ---
 title: No More JavaScript Transpiler
 date: 2020-12-23T16:02:54-07:00
-
+tags: ["javascript"]
 ---
 
 With modern browsers supporting ES6 modules, and Edge is adopting Chromium which align the major browsers to use latest EcmaScript features, we don't need to use transpilers like Webpack or Gulp.  

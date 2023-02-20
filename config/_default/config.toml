@@ -1,0 +1,23 @@
+baseURL = 'http://www.ghassan.page/'
+languageCode = 'en-us'
+title = 'Ghassan Page'
+theme = 'puppet'
+
+copyright = ""
+paginate = 3
+defaultContentLanguage = "en"
+
+hasCJKLanguage = true
+enableInlineShortcodes = true
+enableEmoji = true
+# prevent build failures when using Hugo's Instagram shortcode due to deprecated Instagram API.
+# See https://github.com/gohugoio/hugo/issues/7228#issuecomment-714490456
+ignoreErrors = ["error-remote-getjson"]
+
+disqusShortname = ""
+googleAnalytics = ""
+
+[outputs]
+home = ["HTML", "JSON", "RSS"]
+
+
