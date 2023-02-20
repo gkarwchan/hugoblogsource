@@ -174,7 +174,7 @@ const exp = /\b(\w)\w+ ?/
 
 This article is part of a series about regular expression. These are the other articles:  
 
-1. [Advanced Regular Expression By Example : An Introduction]({% post_url 2020-05-06-Advanced-regular-expression-by-examples %})
-1. [Extract Comments from code]({% post_url 2020-05-07-Regular-expression-extract-comments-from-code %})
+1. [Advanced Regular Expression By Example : An Introduction]({{< ref "/posts/2020_05_06_Advanced_regular_expression_by_examples" >}})
+1. [Extract Comments from code]({{< ref "/posts/2020_05_07_Regular_expression_extract_comments_from_code" >}})
 3. Extract Domain Name (this article)
-4. [Extract Links From HTML Document]({% post_url 2020-09-11-Regular-expression-extract-html-links %})
+4. [Extract Links From HTML Document]({{< ref "/posts/2020_09_11_Regular_expression_Extract_Html_Links" >}})

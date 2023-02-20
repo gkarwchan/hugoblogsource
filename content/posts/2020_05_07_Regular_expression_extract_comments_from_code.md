@@ -174,7 +174,7 @@ The default behavior when you try to match something with the quantifier, it mat
 
 This article is part of a series about regular expression. These are the other articles:  
 
-1. [Advanced Regular Expression By Example : An Introduction]({% post_url 2020-05-06-Advanced-regular-expression-by-examples %})
+1. [Advanced Regular Expression By Example : An Introduction]({{< ref "/posts/2020_05_06_Advanced_regular_expression_by_examples" >}})
 1. Extract Comments from code ( this article)
-3. [Extract Domain Name]({% post_url 2020-05-08-Regular-expression-extract-domain-names %})
-4. [Extract Links From HTML Document]({% post_url 2020-09-11-Regular-expression-extract-html-links %})
+3. [Extract Domain Name]({{< ref "/posts/2020_05_08_Regular_expression_extract_domain_names" >}})
+4. [Extract Links From HTML Document]({{< ref "/posts/2020_09_11_Regular_expression_Extract_Html_Links" >}})

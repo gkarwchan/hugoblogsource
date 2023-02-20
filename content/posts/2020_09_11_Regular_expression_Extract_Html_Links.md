@@ -184,7 +184,7 @@ For more about `findall` check [my previous recipe]({% post_url 2020-05-08-Regul
 
 This article is part of a series about regular expression. These are the other articles:  
 
-1. [Advanced Regular Expression By Example : An Introduction]({{< ref "/posts/2020_05_07_Regular_expression_extract_comments_from_code" >}})
-1. [Extract Comments from code]({% post_url 2020-05-07-Regular-expression-extract-comments-from-code %})
-3. Extract Domain Name (this article)
+1. [Advanced Regular Expression By Example : An Introduction]({{< ref "/posts/2020_05_06_Advanced_regular_expression_by_examples" >}})
+1. [Extract Comments from code]({{< ref "/posts/2020_05_07_Regular_expression_extract_comments_from_code" >}})
+3. [Extract Domain Name]({{< ref "/posts/2020_05_08_Regular_expression_extract_domain_names" >}})
 4. Extract Links From HTML Document (this article)
