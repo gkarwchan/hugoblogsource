@@ -1,6 +1,6 @@
 baseURL = 'http://www.ghassan.page/'
 languageCode = 'en-us'
-title = 'Ghassan Page'
+title = "Ghassan's Page"
 theme = 'puppet'
 
 copyright = ""
