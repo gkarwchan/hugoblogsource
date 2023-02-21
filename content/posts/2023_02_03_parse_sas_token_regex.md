@@ -1,7 +1,7 @@
 ---
 title: Parse Azure SAS token using regular expression
 date: 2023-02-03T20:40:37-07:00
-tags: ["azure", "azure security"]
+tags: ["azure", "security"]
 ---
 
 If you have an Azure SAS token that is not working, it is good idea to parse it and understand what permissions and values it contains.  
@@ -60,6 +60,14 @@ var outputObject = ParseData(inputSasToken);
 }
 
 ```
+Try it for yourself:  
+  
 
 
-{% codepen https://codepen.io/gkarwchan/pen/yLqZXNq %}
+
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="yLqZXNq" data-user="gkarwchan" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/gkarwchan/pen/yLqZXNq">
+  Untitled</a> by Ghassan Karwchan (<a href="https://codepen.io/gkarwchan">@gkarwchan</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
