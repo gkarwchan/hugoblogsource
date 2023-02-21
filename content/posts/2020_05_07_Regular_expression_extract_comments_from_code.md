@@ -5,6 +5,8 @@ date: '2020-05-07T09:45:00'
 author: Ghassan Karwchan
 tags:
 - algorithm
+series:
+- "regular expression recipes"
 ---
 
 
@@ -170,11 +172,7 @@ The default behavior when you try to match something with the quantifier, it mat
 <br />
 <br />
 
-## Regular Expression Series:
+## List of posts ##
+We are going to explain advanced terms of Regular Expressions through different examples, and through series of posts. To see all articles in this series check here:  
 
-This article is part of a series about regular expression. These are the other articles:  
-
-1. [Advanced Regular Expression By Example : An Introduction]({{< ref "/posts/2020_05_06_Advanced_regular_expression_by_examples" >}})
-1. Extract Comments from code ( this article)
-3. [Extract Domain Name]({{< ref "/posts/2020_05_08_Regular_expression_extract_domain_names" >}})
-4. [Extract Links From HTML Document]({{< ref "/posts/2020_09_11_Regular_expression_Extract_Html_Links" >}})
+[Check all articles in this list]({{< ref "/series/regular-expression-recipes">}}).  

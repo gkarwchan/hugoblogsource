@@ -5,6 +5,8 @@ date: '2020-09-11T09:45:00'
 author: Ghassan Karwchan
 tags:
 - algorithm
+series:
+- "regular expression recipes"
 ---
 
 
@@ -180,11 +182,7 @@ For more about `findall` check [my previous recipe]({% post_url 2020-05-08-Regul
 <br />
 <br />
 
-## Regular Expression Series:
+## List of posts ##
+We are going to explain advanced terms of Regular Expressions through different examples, and through series of posts. To see all articles in this series check here:  
 
-This article is part of a series about regular expression. These are the other articles:  
-
-1. [Advanced Regular Expression By Example : An Introduction]({{< ref "/posts/2020_05_06_Advanced_regular_expression_by_examples" >}})
-1. [Extract Comments from code]({{< ref "/posts/2020_05_07_Regular_expression_extract_comments_from_code" >}})
-3. [Extract Domain Name]({{< ref "/posts/2020_05_08_Regular_expression_extract_domain_names" >}})
-4. Extract Links From HTML Document (this article)
+[Check all articles in this list]({{< ref "/series/regular-expression-recipes">}}).  

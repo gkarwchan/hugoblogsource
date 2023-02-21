@@ -5,6 +5,8 @@ date: '2020-05-08T09:45:00'
 author: Ghassan Karwchan
 tags:
 - algorithm
+series:
+- "regular expression recipes"
 ---
 
 
@@ -169,12 +171,7 @@ const exp = /\b(\w)\w+ ?/
     do_something_with_capturing_group_value(rslt[1])
 ```
 
+## List of posts ##
+We are going to explain advanced terms of Regular Expressions through different examples, and through series of posts. To see all articles in this series check here:  
 
-## Regular Expression Series:
-
-This article is part of a series about regular expression. These are the other articles:  
-
-1. [Advanced Regular Expression By Example : An Introduction]({{< ref "/posts/2020_05_06_Advanced_regular_expression_by_examples" >}})
-1. [Extract Comments from code]({{< ref "/posts/2020_05_07_Regular_expression_extract_comments_from_code" >}})
-3. Extract Domain Name (this article)
-4. [Extract Links From HTML Document]({{< ref "/posts/2020_09_11_Regular_expression_Extract_Html_Links" >}})
+[Check all articles in this list]({{< ref "/series/regular-expression-recipes">}}).  
