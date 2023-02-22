@@ -1,7 +1,7 @@
 ---
 title: A developer introduction to cloud networking
 date: 2023-01-08T20:07:36-07:00
-tags: ["azure", "azure networking"]
+tags: ["azure"]
 ---
 
 As a developer who dealt with the cloud, either to create a virtual machine, or to deploy a website that connect to a database, then most probabely you had to deal even in short with a private network.

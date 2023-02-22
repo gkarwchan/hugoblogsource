@@ -1,7 +1,7 @@
 ---
 title: Take your development environment anywhere and on any machine with Dev Containers
 date: 2022-12-29T19:51:56-07:00
-tags: [".net", "docker", "dev tools"]
+tags: ["asp.net", "container", "dev tools"]
 ---
 
 [Dev containers](https://containers.dev/) provides a fantastic way to onboard a new developer up and running in matter of just clone the git repository.  

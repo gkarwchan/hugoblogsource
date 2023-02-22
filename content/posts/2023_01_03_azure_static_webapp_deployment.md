@@ -1,7 +1,7 @@
 ---
 title: Deploy A Single Page Application to Azure Static Webapp using TeamCity, Jenkins or any CI, or command line
 date: 2023-01-03T19:56:30-07:00
-tags: ["azure", "azure static web app", "ci/cd"]
+tags: ["azure", "ci/cd"]
 ---
 
 I was trying to setup a deployment for an SPA application to an Azure Static Web app using TeamCity, but most of the tutorials I found was doing the deployment through CI/CD of Github's Actions by monitoring a specific branch of a Github repository and deploy automatically whenever we check in into that branch, or the other alternative is using Azure DevOps pipeline.

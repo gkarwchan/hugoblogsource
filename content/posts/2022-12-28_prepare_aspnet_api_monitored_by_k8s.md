@@ -1,7 +1,7 @@
 ---
 title: Prepare .NET core Microservice to be monitored by Kubernetes
 date: 2022-12-27T19:47:05-07:00
-tags: ["kubernetes-k8s", "asp.net", "aks" ]
+tags: ["asp.net", "azure", "container" ]
 ---
 
 ## Kubernetes Monitoring:

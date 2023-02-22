@@ -1,7 +1,7 @@
 ---
 title: SPA routing and how to handle it with Azure Static Web app.
 date: 2023-01-08T19:58:31-07:00
-tags: ["azure static web app"]
+tags: ["azure"]
 ---
 
 If you built a SPA application using one of the modern SPA frameworks like React, Vue, Angular..., then you must be using their router to define your client side routing.  

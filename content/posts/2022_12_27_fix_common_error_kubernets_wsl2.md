@@ -1,7 +1,7 @@
 ---
 title: How to fix common error using Azure Kubernetes AKS from WSL2
 date: 2022-12-27T19:43:59-07:00
-tags: ["kubernetes-k8s", "aks", "azure" ]
+tags: ["azure" , "container"]
 ---
 
 When you use Kubernetes CLI tool: `kubectl` that is installed while you installed Docker Desktop for Windows, there is a small glitch that it will fail the `kubectl` commands, because of Kubeconfig file.

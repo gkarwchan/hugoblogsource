@@ -1,7 +1,7 @@
 ---
 title: Azure Networking Recipes - Connect Azure Database and an Azure App Service using Virtual Network.
 date: 2023-01-10T20:00:24-07:00
-tags: ["azure", "azure networking", "azure app service" ]
+tags: ["azure", "security" ]
 ---
 
 If your application is connecting to Azure database, or any other resources, then connecting them through Virtual Network (VNet) will enhance the performance (assuming the app service and the resources are in the same region), as well it enhance the security and we can lock the resources to have private endpoint, and not accessed publicly. 
