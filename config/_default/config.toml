@@ -1,4 +1,4 @@
-baseURL = 'https://www.ghassan.page'
+baseURL = '/'
 languageCode = 'en-us'
 title = "Ghassan's Page"
 theme = 'puppet'
