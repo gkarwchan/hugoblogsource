@@ -1,11 +1,11 @@
 ---
-title: Check performance bottleneck with Azure Application Insight.
+title: Check performance bottleneck with Azure Application Insights.
 date: 2023-02-22T21:44:55-07:00
 tags: ["azure", "performance"]
 ---
 
 
-If you have Application Insight enabled for your azure app service, then it is a piece of cake to get the performance bottleneck in your app, and even it check external dependencies like database queries or any other external dependencies.  
+If you have Application Insights enabled for your azure app service, then it is a piece of cake to get the performance bottleneck in your app, and even it check external dependencies like database queries or any other external dependencies.  
 <!--more-->
 I have a Web API application, that is accessing Azure Sql Server, and Azure blob storage.  
 
