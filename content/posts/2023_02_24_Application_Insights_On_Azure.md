@@ -87,3 +87,19 @@ By just adding these few lines, our SDK will collect lots of metrics from the ru
 * Performance Counters: for example memory and CPU usage.
 * Events Counter: There are built-in events that the SDK will collect, and you can create your own custom event. For a list of built-in events [check this link](https://learn.microsoft.com/en-us/azure/azure-monitor/app/eventcounters).
 
+#### What to capture with the SDK
+Many metrics can be collected, and each one has a corresponding config name which we can turned off
+
+* Http request calls
+* Performance counters (memory, CPU usage)
+* Dependencies: [check this for a list of trackable dependencies](https://learn.microsoft.com/en-us/azure/azure-monitor/app/asp-net-dependencies#dependency-auto-collection)
+* Heart Beat feature
+* Events: this deserve another post
+
+
+#### Frequency of metric sampling
+How often the SDK will send sampling to Azure service?  
+We can configure that using sampling configuration. There are two options to define sampling frequency:
+
+* Adaptive: which is the default
+* Fixed-rate: which you can use to reduce the traffic to the server.
