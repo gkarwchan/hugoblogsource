@@ -3,30 +3,34 @@ title: Everything you need to know about telemetry for your Asp.NET application 
 date: 2023-02-24T21:44:55-07:00
 tags: ["azure", "asp.net"]
 ---
-Azure provides services for instrumentation and observability (monitoring) of applications, and all these services reside under Azure Monitor.  
+All of the services that Azure offers for the instrumentation and observability (monitoring) of applications are grouped under Azure Monitor.  
 
-Azure Monitor is an umbrella of three services:  
-1. Azure Monitor itself which provides the observability part to monitor your applications.
-2. Application Insights, or its alternative OpenTelemetry which provides the telemetry, and instrumentation part.
-3. Log Analytics which provides the analytics part.  
+Three services fall under the banner of Azure Monitor:  
+1. Azure Monitor itself, which offers the observability component to track your apps.
+2. Application Insights, or its substitute OpenTelemetry, which offers the instrumentation and telemetry components
+3. The analytics component is provided by Log Analytics.
 
-In this post we will focus on the instrumentation part.
+We will emphasise the instrumentation component in this post.  
 
 ## Telemetry and instrumentation in Azure.
 Telemetry, the data collected to observe your application, can be broken into three types or "pillars":  
 * Distributed Tracing
 * Metrics
 * Logs
+  
+
 Azure provides two services that cover this area:  
 * Application Insights
 * OpenTelemtry
-Application Insights in the service that provides comprehensive and rich tools to collect data about your application, and it is the service that we are going to cover it in this post. But it is worth talking briefly about `OpenTelemetry`.  
+
+Application Insights is the service we will discuss in this post because it offers thorough and rich capabilities for gathering information about your application. Yet `OpenTelemetry` deserves a quick mention.
 
 ### OpenTelemetry on Azure:
-OpenTelemetry is the new kid in the hood and it is the future of telemetry.It is an initiative trying to standardize and unify telemetry APIs and SDKs, and build vendor-neutral SDKs for telemetry.  
-It is still in early phase of development, and it only cover the **Distributed Tracing** part of the telemetry. 
-This technologies are used a lot in docker and Kubernetes world.  
-Azure Monitor recently start to adopt OpenTelmetry by reading its data. But generally speaking until the technology move more steps forward, and specially if we are working on App service, and Azure functions we should chose Application Insights because it has way more features.  
+Resuming with Application Insights
+OpenTelemetry is the new kid in the hood and it is the future of telemetry. This initiative aims to standardize telemetry APIs and SDKs, and establish vendor-neutral SDKs for telemetry.  
+It is still in early phase of development, and it only cover the **Distributed Tracing** part of the telemetry.   
+The technology is widely utilised in the world of Docker and Kubernetes.  
+Recently, Azure Monitor began implementing OpenTelmetry by reading its data. Nonetheless, in general, we should choose Application Insights because it has far more functionality till this technology advances further, especially if we are working on App Service and Azure functionalities.  
 
 Now back to Application Insights.  
 
