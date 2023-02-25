@@ -103,3 +103,45 @@ We can configure that using sampling configuration. There are two options to def
 
 * Adaptive: which is the default
 * Fixed-rate: which you can use to reduce the traffic to the server.
+
+## Logging to Application Insights
+Finally, we need to do our logging in Application Insights.  
+First add this package:
+
+```
+Microsoft.Extensions.Logging.ApplicationInsights
+```
+
+
+then we add this to our `appsettings.json`. 
+
+```json
+"ApplicationInsights": {
+    "InstrumentationKey": "[The instrumentation key]"
+  },
+"Logging": {
+    "PathFormat": "[The path and file format used in file logging, e.g.: c:\\log-{Date}.txt]",
+    "LogLevel": {
+      "Default": "Information"
+    },
+    "ApplicationInsightsLoggerProvider": {
+      "LogLevel": {
+        "Default": "Warning"
+      }
+    }
+  }
+```
+
+and add this when you configure the service collection
+
+```csharp
+// as we discussed before
+services.AddApplicationInsightsTelemetry();
+
+    services.AddLogging(logBuilder =>
+             {
+                 logBuilder.AddApplicationInsights(YourInstrumentationKey)
+                     // adding custom filter for specific use case. 
+                     .AddFilter("Orleans", (level) => level == LogLevel.Error);
+    });
+```
