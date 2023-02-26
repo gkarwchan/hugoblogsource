@@ -4,9 +4,9 @@ date: 2022-12-19T19:15:28-07:00
 tags: ["asp.net"]
 ---
 
-## Why this post?  
-Looking at the new ASP.NET 6 and its minimal hosting model, triggered some thoughts comparing it to ASP.NET 2, and made me think if Microsoft going back to some old concepts. And was questioning the real benefits of migrating to this model.
-So let me explain, and compare it with ASP.NET version 5 and 2.
+## Why this post?
+ASP.NET 6's minimal hosting model made me compare it to ASP.NET 2 and wonder if Microsoft is going back to some old concepts. I was curious about the potential benefit of migration, so I intend to explain and compare ASP.NET 6, 5 and 2.
+
 
 ## The new **WebApplication** builder and some history of ASP.NET:  
 
@@ -15,7 +15,16 @@ Let us generate a new webapi application in .net 6 using webapi template:
 ```bash
 dotnet new webapi -n tutorial.webapi
 ```
+
 You will see that we only have one file **`program.cs`**, and there is no more **`startup.cs`** and the code as follows:
+
+```csharp
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers();
+var app = builder.Build();
+```
+
+
 
 Looking at the new **WebApplication** builder, I couldn't help compare it to the old ASP.NET 2 **WebHost** Builder.
 
@@ -28,30 +37,38 @@ Which was creating **IWebHostBuilder** that will build **IWebHost**.
 
 WebHost was not recommended after 3.x, because ASP.NET 3.x came with the idea of a generic host where you can build services that can be hosted not only on the web, but as well on Worker Services, and even Windows Services.
 
-Another question came up was the missing of startup.cs file.
+Another question came up was the missing of startup.cs file, and similarity to what was before version 2.
 
-ASP.NET from version 2 (or maybe 1), distinguished between host initialization, and the web application initialization,
-And to manage the two in loose coupling they created the `program.cs` file to manage the host, and `startup.cs` to initialize the web application. Where host initialization deals with reading settings from config files, environment and command line arguments, plus handle the logging, and the web initialization deals with configure ASP.NET dependency injection framework and configure the web pipeline, and they couple them with this.
+ASP.NET from version 2 (or maybe 1), distinguished two concepts:  
+* host initialization
+* and Web application initialization.
+
+And to manage the two in loose coupling they created the `program.cs` file to manage the host, and `startup.cs` to initialize the web application.  
+Host initialization (program.cs) deals with reading settings from config files, environment and command line arguments, plus handle the logging, and the web initialization (startup.cs) deals with configure ASP.NET dependency injection framework and configure the web pipeline.
+
+And they <u>connect</u> them with this.
 
 ```csharp
 // code of program.cs
 public static void Main(string[] args)
 {
-    CreateHostBuilder(args).Build().Run(); // 
+    CreateHostBuilder(args).Build().Run(); 
 }
 
 public static IHostBuilder CreateHostBuilder(string[] args)
 {
     return Host.CreateDefaultBuilder(args)
-         .ConfigureWebHostDefaults(webbuilder => { webBuilder.UseStartup<Startup>(); });
-
+         .ConfigureWebHostDefaults(
+            webbuilder => { 
+               webBuilder.UseStartup<Startup>(); });
 }
 ```
-As you can see, they achieved initialization the web application from the general host using an extension method on the IWebHostBuilder that initialize the web application in the `startup.cs` code.
+
+As you can see, they achieved initialization `the web application` from the `general host` using an extension method on the IWebHostBuilder that initialize the web application in the `startup.cs` code.
 
 The code in `startup.cs` will initialize the web by configure ASP.NET dependency injection, and define the web pipeline, and define the mappings.
 
-So, the new WebApplication Builder, and the missing `startup` file made me ask if Microsoft is getting rid of the general host and going back to the only Webhost.
+So, the new WebApplication Builder, and the missing `startup` file made me ask if Microsoft is getting rid of the general host and going back to the only one `Webhost`.
 
 Well, the answer is NO, but before answer how, let me add the another issue I found in the new code, which is regarding the mapping URL to actions.
 
@@ -163,7 +180,7 @@ After I read [in this section](https://learn.microsoft.com/en-us/aspnet/core/mig
 
 Adding to that, if you read this [FAQ](https://learn.microsoft.com/en-us/aspnet/core/migration/50-to-60?view=aspnetcore-6.0&tabs=visual-studio#faq), you will see that the generic host still underpins the new hosting model and is still the primary way to host applications.
 
-So if you are migrating from ASP.NET 6, don't bother to migrate to the new hosting model, because it is just hide and encapsulate some code that you are already written.
+So if you are migrating from ASP.NET 5, don't bother to migrate to the new hosting model, because it is just hide and encapsulate some code that you are already written.
 
 One important clarification that Minimal Hosting model is different than Minimal API. Minimal API doesn't include the mapping of controllers and MVC, while Minimum hosting model is still a WebAPI that built on top of MVC, but having less code than ASP.NET 5. So it is mostly hide lots of boilerplate code.
 
