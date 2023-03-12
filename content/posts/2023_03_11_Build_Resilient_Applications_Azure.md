@@ -1,6 +1,6 @@
 ---
 title: build resilient applications accessing Azure services with no code.
-date: 2023-03-11T21:44:55-07:00
+date: 2023-03-11T18:44:55-07:00
 tags: ["azure", "asp.net"]
 ---
 
