@@ -1,5 +1,5 @@
 ---
-title: build resilient applications accessing Azure services with no code.
+title: Build resilient applications accessing Azure services with no code.
 date: 2023-03-11T18:44:55-07:00
 tags: ["azure", "asp.net"]
 ---
@@ -108,7 +108,7 @@ This will add delay for our application.
 The Circuit-breaker pattern will fix this, by assuming the service is down after many failed calls.  
 If the service marked as down, then code will immediately fail the call without even calling the service.  
 This state is called `Open Circuit`.  
-Then the code will wait for a while before it try again to call the service, and if it is still failing, then the state will still be `Open', otherwise it is marked as healthy, and the state will be `Closed Circuit`.  
+Then the code will wait for a while before it try again to call the service, and if it is still failing, then the state will still be `Open`, otherwise it is marked as healthy, and the state will be `Closed Circuit`.  
 Circuit breaker should be used in conjunction with the retry pattern.  
 
 #### Using Cicruit-breaker with Polly.
