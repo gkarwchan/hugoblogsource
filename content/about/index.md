@@ -14,3 +14,4 @@ But sometimes I enjoy developing outside of Microsoft world, with Python, Node.j
 Lots of JavaScript experience.  
 
 
+<div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="d348a91e-3e79-4377-9f1e-a436cccb92bf" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
