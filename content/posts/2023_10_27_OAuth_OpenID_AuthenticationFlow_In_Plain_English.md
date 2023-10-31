@@ -40,14 +40,18 @@ There are three technologies that provide FIdM services:
 
 ### How they are different?
 
-#### SAML:
-SAML was the oldest one, and is used mainly for web applications and mostly internal web applications. It uses XML to communicate to the Identity providers. SAML only returns a digital identity called **`SAML Assertion`** to identify the user. The `SAML Assertion` is very simple and it is the simplest representation of the user.
+#### SAML and WS-Federation:
+SAML was the oldest one, and is used mainly for web applications and mostly internal web applications. It uses XML to communicate to the Identity providers. SAML was developed when calling external services was done using SOAP (an old protocol from web services). 
+Interesting to note that an approach to make better SAML was initiated and was called **`WS-Federation`** but then later REST and HTTP replaced SOAP, and JSON replaced XML, and SAML/WS-Federation became less and less used.  
+SAML only returns a digital identity called **`SAML Assertion`** to identify the user. The `SAML Assertion` is very simple and it is the simplest representation of the user.  
+
 
 #### OAuth 2.0:
-Although OAuth is used as one of FIdM technologies, but it was mainly built for that purpose.
+Although OAuth is used as one of FIdM technologies, but it wasn't mainly built for that purpose.
 With the rising of social media and the wealth of its data, social media companies wanted to provide its data and share user data across the applications.
-They provided more sophisticated protocols to share user information and allow users to choose what information they want to share with other apps, and this is how OAuth 2.0 was built.
-OAuth 2.0 has all features of FIdM, plus it add more to allow users to share more info about themselves to other apps and the users can choose what they want to share.  
+They provided more sophisticated protocols to share user information and allow users to choose what information they want to share, and this is how OAuth 2.0 was built.
+
+Because OAuth 2.0 needed to identify the users on their own social media servers, so it has the SSO features of FIdM, beside it added more features to allow users to chose what information they want to share.  
 For example on google we all saw this when using google login.
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ngm47aure1o2jr0ta3ac.png)
 
@@ -78,4 +82,5 @@ Each type has its matching OAuth
 | Native mobile APP | the Authorization Code Flow with Proof Key for Code Exchange (PKCE) |
 
 ## Conclusion
-Hopefully I was able to explain these technical terms and technologies in simple plain English.
+Hopefully I was able to explain these technical terms and technologies in simple plain Engligh.
+
