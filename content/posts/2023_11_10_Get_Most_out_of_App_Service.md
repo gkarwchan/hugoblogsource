@@ -78,9 +78,6 @@ The following Identity providers are available by default:
 6. GitHub
 
 ## 2. Built-in logging and instrumentation:
-
-
-
 ## 3. API Management
 
 
