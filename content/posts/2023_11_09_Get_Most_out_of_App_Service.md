@@ -1,6 +1,6 @@
 +++
 title = "Get the most out of Azure App Service."
-date = 2023-11-10T12:41:54-06:00
+date = 2023-11-09T12:41:54-06:00
 short = true
 toc = true
 tags = ["azure"]
