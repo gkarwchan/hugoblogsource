@@ -50,8 +50,17 @@ As well deployment slots provide zero production deployment because when you dep
 
 ## 3. Using Key Vault and App Configurations.
 If you have sensitive credentials and you want to provide them for your application, it is essentials to not store these in your code repository.  Instead we can use the App Configuration and for secrets we can use Key Vault.  
-[Key vault provides extra layer of security over App Configuration](https://learn.microsoft.com/en-us/azure/azure-app-configuration/faq#should-i-store-secrets-in-app-configuration).  
 And more important, A user with App Service Administrator can add configuration to reference the key vault without having access to the key vault data.  So if you are using database credentials and you want to keep it secret even from the user who is managing the App Service, then you can store it in Key Vault and let the manager reference the key vault in the app configurations.  
+If you are using .NET you can add KeyVault configuration using 
+```csharp
+using Azure.Identity;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration.AddAzureKeyVault(
+    new Uri($"https://{builder.Configuration["KeyVaultName"]}.vault.azure.net/"),
+    new DefaultAzureCredential());
+```
 
 ## 4. Virtual Networking
 If you are using other SaaS services on Azure, like databases or message queue, or cashing service, then you can use virtual networking to provide a secure and private connection between the App service and those services. Those services will be secured from the outside world and only accessed through a private connection to your app.  [Here and example on how to create a private connection between App service and Azure Sql Server](https://www.ghassan.page/posts/2023_01_10_azure_networking_reciep_one/).  
