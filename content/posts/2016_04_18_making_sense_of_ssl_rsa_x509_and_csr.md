@@ -10,7 +10,7 @@ comment = true
 +++
 
 This is the second part of learning about SSL/TLS.  
-[The first part was how to protect the site with SSL]("https://www.ghassan.page/2016/03/secure-your-web-site-with-ssl.html").  
+[The first part was how to protect the site with SSL]("https://www.ghassan.page/posts/2016_03_11_secure_your_application_with_ssl/").  
 This part is about explaining more the terms, technologies, protocols, standards used in SSL.  
 ## What is SSL/TLS:
 `SSL` is the standard protocol to secure the communication between a web server and a browser, by creating an encrypted link between the two.  
