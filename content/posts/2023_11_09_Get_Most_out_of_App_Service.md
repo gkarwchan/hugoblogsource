@@ -67,7 +67,16 @@ If you are using other SaaS services on Azure, like databases or message queue, 
 
 ## 5. Managed Identity:
 Managed Identity is an Microsoft Entra Identity that is issued for an application, so the application can provide this identity to other services (like database), and because it is Microsoft Entra identity so you can use it like any other identity and you don't need to store the credentials to communicate to the database.  
+To add a managed identity to the web app run the following:  
+```bash
+az webapp identity assign --resource-group <resource-group-name> --name <app-service-name>
+```
+The previous command will create a managed identity and will return json with the new `principalId`.  
+Now you can give permissions to that user by assigning them permissions to the services. For example to give that user permissions to read a key-vault that we created for the web app, run the following:  
 
+```bash
+az keyvault set-policy --secret-permissions get list --name <your-unique-vault-name> --object-id <your-managed-identity-principleid>
+```
 ## 6. Integrate with other Azure web services: 
 There are two services that can increase the security and enhance the performance of the web application and they are easy to integrate to App service:  
 * Azure CDN (to host any media or static files). 
