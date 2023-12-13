@@ -10,7 +10,7 @@ comment = true
 +++
 
 This is the second part of learning about SSL/TLS.  
-[The first part was how to protect the site with SSL]("https://www.ghassan.page/posts/2016_03_11_secure_your_application_with_ssl/").  
+[The first part was how to protect the site with SSL](https://www.ghassan.page/posts/2016_03_11_secure_your_application_with_ssl).  
 This part is about explaining more the terms, technologies, protocols, standards used in SSL.  
 ## What is SSL/TLS:
 `SSL` is the standard protocol to secure the communication between a web server and a browser, by creating an encrypted link between the two.  
@@ -30,7 +30,7 @@ This negotiation phase is called TLS handshake.
 
 ### 1. Public key encryption RSA:
 As we mentioned the server that implement `SSL` has pair of keys, public and private, which are used during the TLS handshake.   
-The most common public key encryption used in SSL is the **`RSA`**`.  
+The most common public key encryption used in SSL is the **`RSA`**.  
 In `OpenSSL` tools, the `RSA` is the default option when generating a public/private key.  
 To generate key pairs with OpenSSL, we generate first a private key, then generate a public key depending on the private key.  
 Example of generate a private key: 
