@@ -90,11 +90,19 @@ Just as example of these services:
 * Microsoft Identity Platform is bunch of OAuth tools, and they are provided on Azure.
 
 There are bunch of benefits I can list for using such services.  
-1. Simple of use:  By using these services, you don't need to learn which `flow` is proper for your application, and you don't have to worry about how to implement these flow. For example if you use Auth0, and you want to implement security, Auth0 will give you a list of options for your application:
+1. Easy of use.
+2. Up-to-date with security standard.  
+
+### Easy of use:
+By using these services, you don't need to learn which `flow` is proper for your application, and you don't have to worry about how to implement these flow. For example if you use Auth0, and you want to implement security, Auth0 will give you a list of options for your application:
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rv72wxytprr15mcot4vq.png)
 
 All you need to do is to chose what type of application, and by using the service with its SDK will handle the rest by choosing the proper `flow` and will communicate to the server to the proper end points.  
+
+### Up-to-date with security standard:
+The security standard changed with time. For example: SH-256 is the accepted hash standard for encryption, but in the future that will change for sure, so by using off-the-shelf service, they will take care of that update.  
+Another good example is change OAuth 2.0 standard. For example the flow `Implicit Grant` was an accepted standard flow for SPA application, but later in 2018 it is considered not secured enough and a new standard came which is `Authorization Code Grant`. So if you were using Auth0 for example and you defined your application as SPA, all what you need to do is to update the SDK library and Auth0 will take care of the rest for you.
 
 ## Conclusion
 Hopefully I was able to explain these technical terms and technologies in simple plain English.
