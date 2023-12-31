@@ -81,9 +81,9 @@ Each type has its matching OAuth, and each `flow` communicate to the `Authorizat
 | Local Desktop App | Client Credential Flow |
 | Native mobile APP | the Authorization Code Flow with Proof Key for Code Exchange (PKCE) |
 
-## Using Off-the-shelf Service:
-You can build your own `Authentication Server`, and write code with client side JavaScript, and server side code. Or you can use one of the off-the-shelf services on the market.  
-These services provides all the OAuth 2.0 and OpenID Connect services for your needs.   
+## Using Off-the-shelf `SaaS` Service:
+You can build your own `Authentication Server`, and write code with client side JavaScript, and server side code. Or you can use one of the off-the-shelf `SaaS` services on the market.  
+These `SaaS` services provides all the OAuth 2.0 and OpenID Connect services for your needs.   
 Just as example of these services:  
 * [Auth0] (https://auth0.com/) is very popular service, and maybe the most used one.
 * [Google Firebase] (https://firebase.google.com/) is another very popular service.
