@@ -72,7 +72,7 @@ We can define these types of applications:
 2. Single Page Application (SPA), where the client is a thick JavaScript application that can be hosted on any place, and it called different API application.
 3. Mobile native APP.
 4. Local desktop App.
-Each type has its matching OAuth 
+Each type has its matching OAuth, and each `flow` communicate to the `Authorization Server (SA)` using different services and end point.
 
 | Application Type | OAuth Flow |
 | ----- | ----- |
@@ -81,6 +81,21 @@ Each type has its matching OAuth
 | Local Desktop App | Client Credential Flow |
 | Native mobile APP | the Authorization Code Flow with Proof Key for Code Exchange (PKCE) |
 
+## Using Off-the-shelf Service:
+You can build your own `Authentication Server`, and write code with client side JavaScript, and server side code. Or you can use one of the off-the-shelf services on the market.  
+These services provides all the OAuth 2.0 and OpenID Connect services for your needs.   
+Just as example of these services:  
+* [Auth0] (https://auth0.com/) is very popular service, and maybe the most used one.
+* [Google Firebase] (https://firebase.google.com/) is another very popular service.
+* Microsoft Identity Platform is bunch of OAuth tools, and they are provided on Azure.
+
+There are bunch of benefits I can list for using such services.  
+1. Simple of use:  By using these services, you don't need to learn which `flow` is proper for your application, and you don't have to worry about how to implement these flow. For example if you use Auth0, and you want to implement security, Auth0 will give you a list of options for your application:
+
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rv72wxytprr15mcot4vq.png)
+
+All you need to do is to chose what type of application, and by using the service with its SDK will handle the rest by choosing the proper `flow` and will communicate to the server to the proper end points.  
+
 ## Conclusion
-Hopefully I was able to explain these technical terms and technologies in simple plain Engligh.
+Hopefully I was able to explain these technical terms and technologies in simple plain English.
 
