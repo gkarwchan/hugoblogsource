@@ -9,7 +9,8 @@ series = []
 comment = true
 +++
 
-Public SPA challenge when it comes to use OAuth 2.0, is you cannot store any type of secrets of credentials in your code. This is why OAuth provided a special flow to be used by SPA: Authorization Code Grant & PKCE. We are going to describe this flow in details here.  
+When a public SPA needs to authenticate through OAuth 2.0, it faces a big challenge.  
+The challenge is you cannot store any type of secrets of credentials in your code. This is why OAuth provided a special flow to be used by SPA: Authorization Code Grant & PKCE. We are going to describe this flow in details here.  
 
 ## Summary of the process:
 To describe the flow briefly, when the SPA requires to get a token it will direct the application to an Authorization Server (AS), which will use that server login page and UI, and the user will run the login process on the AS server website, then that server will return back to the original client website using a callback url passing the token to the SPA.  
@@ -115,3 +116,11 @@ The server will response with json with the token and refresh token, and maybe i
 }
 ```
  
+ ### A word about scopes:  
+ An API can define a set of permissions that can be used to divide the functionality of that API into smaller chunks. When a API's functionality is chunked into small permission sets, third-party apps can be built to request only the permissions that they need to perform their function. Users and administrators can know what data the app can access.  
+ In OAuth 2.0, these types of permission sets are called scopes, and they are presented as string values.  
+ The values can be something like this as examples:  financial:read, financial:write, admin, user:write...   
+ For the simpler protocol OpenID Connect, it uses only three predefined scopes:  
+ * openid: indicate the request could be used in OIDC for authentication. It will return the user ID in `id_token`, or `sub`
+ * profile: return profile information like first name, last name, ...
+ * email: return the email
