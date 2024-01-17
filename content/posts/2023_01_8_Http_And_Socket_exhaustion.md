@@ -44,7 +44,7 @@ To open a connection the computer needs to open a port with a random number betw
 
 The combination of the computer IP address and port is called **`Socket`**.  
 The problem with above code is even you dispose the Http client, but the underlying connection won't be disposed immediately, and the port won't be release right away.  
-In Http protocol, when a connection disposed, it will stays in **`TIME_WAIT`** status for 240 seconds (4 minutes).  
+In Http protocol, when a connection disposed, it will stays in **`TIME_WAIT`** status for 240 seconds (4 minutes). To read more about the `TIME_WAIT` [check TCP/HTTP specification](https://www.rfc-editor.org/rfc/rfc9293.html#section-3.3.2).  
 
 With lots of calls you might use all the ports on the client computer, which lead to the application will hang waiting for a port to be released.  
 That situation is called **`Socket Exhaustion`**.  
@@ -70,17 +70,17 @@ Having one HttpClient, will keep the old IP address that was detected on the fir
  
 ### How IHttpClientFactory solved the problem?  
 HttpClient internally is creating a connection and doing the calls using a class in .NET called **`SocketsHttpHandler`**.  
-The real work of establishing a connection is happening inside `SocketsHttpHandler` , and the disposing of this handler that will take **`Time_WAIT`** for 4 minutes to be really released.  
+The real work of establishing a connection is happening inside `SocketsHttpHandler` , and the disposing of this handler which is taking **`Time_WAIT`** for 4 minutes to be really released.  
 
-HttpClientFactory uses an internal class called `HttpClientHandler`, and it is the same as `SocketsHttpHanlder`, which might be confusing, so before we talk what HttpClientFactory is doing, let us explain the difference.  
+HttpClientFactory uses an internal class called `HttpClientHandler`, and it is the same as `SocketsHttpHandler`, which might be confusing, so before we talk what HttpClientFactory is doing, let us explain the difference.  
 
 #### HttpClientHandler vs. SocketsHttpHandler:
-HttpClientHandler was the old handler that HttpClient uses to do the real http communication. After version Core 2.1, the SocketsHttpHanlder was introduced, and HttpClient started using the new handler, but HttpClientFactory kept using the old handler HttpClientHandler.  
-But in Core 5.0, HttpClientHandler [was changed to use SocketsHttpHanlder internally](https://github.com/dotnet/runtime/blob/f518b2e533ba9c5ed9c1dce3651a77e9a1807b8b/src/libraries/System.Net.Http/src/System/Net/Http/HttpClientHandler.cs#L16). So in reality they are the same, and when you are talking about Core version 5.0 and later both are the same which is SocketsHttpHandler.  
+HttpClientHandler was the old handler that HttpClient uses to do the real http communication. After version Core 2.1, the SocketsHttpHandler was introduced, and HttpClient started using the new handler, but HttpClientFactory kept using the old handler HttpClientHandler.  
+But in Core 5.0, HttpClientHandler [was changed to use SocketsHttpHandler internally](https://github.com/dotnet/runtime/blob/f518b2e533ba9c5ed9c1dce3651a77e9a1807b8b/src/libraries/System.Net.Http/src/System/Net/Http/HttpClientHandler.cs#L16). So in reality they are the same, and when you are talking about Core version 5.0 and later both are the same which is SocketsHttpHandler.  
 
 If you read about IHttpClientFactory you will read that it is using an internal class called HttpClientHandler, and that might create confusion.  
 
-So back to our question how HttpClientFactory fixed the problmes?  
+So back to our question how HttpClientFactory fixed the problems?  
 `IHttpClientFactory` will create an internal pool of  `HttpClientHandler` and keep them and passing them when create `HttpClient`. So when create or dispose `HttpClient`, `IHttpClientFactory` is using `HttpClientHandler` from its pool.  
 `IHttpClientFactory` rotate between the `HttpClientHandler` in the pool every 2 minutes (the half time of **`WAIT_TIME`**).  
 For 2 minutes `IHttpClientFactory` uses one `HttpClientHandler` to create all `HttpClient` during that 2 minutes.  
@@ -221,3 +221,5 @@ public class MyController : ControllerBase
     }
 }
 ```
+
+## Another solution using SocketsHttpHandler?  
