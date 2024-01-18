@@ -1,0 +1,25 @@
+<div>
+	<ul class="nav nav-tabs" role="tablist">
+
+		{{ $tabTotal := .Get "tabTotal" }}
+		{{ $tabRightAlign := .Get "tabRightAlign" }}
+		{{ $tabName := .Scratch.Get "tabName" }}
+		{{ $tabID := .Scratch.Get "tabID" }}
+
+		{{ range $i, $sequence := (seq $tabTotal) }}
+
+		<li class="{{ if eq $i 0 }} active {{ end }}"
+		   id="nav-{{ (index $tabID $i) }}" data-toggle="tab"
+		   role="presentation" aria-selected="true">
+		   <a href="#{{ index $tabID $i }}">{{ (replaceRE "(\\s)" "" (index $tabName $i)) }}</a></li>
+
+		{{ end }}
+
+	</ul>
+</div>
+
+<div class="tab-content" id="nav-tab-content">
+
+	{{ .Inner }}
+
+</div>

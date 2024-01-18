@@ -7,7 +7,6 @@ tags = ["azure", "security"]
 categories = []
 series = []
 comment = true
-draft = true
 +++
 
 A common challenge for developers is the management of secrets and credentials used to secure communication between different components making up a solution. Managed identities eliminate the need for developers to manage credentials.  
@@ -31,24 +30,53 @@ After creating the identity you use Azure RBAC to give that identity the permiss
 
 ## An example: Web app that access Sql Server
 
-Let us create an example of a web application hosted on an App Service, that connect to an SQL server.  
+Let us create an example of a web application hosted on an App Service, that connect to an SQL server.   
+We are assuming you already created the app service plan.  
 
-#### 1. create the service plan
 
-{{< tabs >}}
-{{% tab name="python" %}}
-```python
-print("Hello World!")
-```
-{{% /tab %}}
-{{% tab name="R" %}}
-```R
-> print("Hello World!")
-```
-{{% /tab %}}
-{{% tab name="Bash" %}}
-```Bash
-echo "Hello World!"
-```
-{{% /tab %}}
-{{< /tabs >}}
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#azcli" aria-controls="azcli" role="tab" data-toggle="tab">Azure cli</a></li>
+    <li role="presentation"><a href="#powershell" aria-controls="profile" role="tab" data-toggle="tab">Powershell</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+  <div role="tabpanel" class="tab-pane active" id="azcli">
+    {{< simpletab >}}
+ ```bash
+    az webapp create 
+        --name <name-of-app> 
+        --resource-group <resource-group-name> 
+        --plan <name-of-plan> 
+        --assign-identity 
+        --runtime "dotnet:7"
+  ```
+    {{< /simpletab >}}
+   </div>
+  <div role="tabpanel" class="tab-pane" id="powershell">
+    {{< simpletab >}}
+ ```powershell
+    New-AzWebApp
+    [[-ResourceGroupName] <String>]
+    [-Name] <String>
+    [[-Location] <String>]
+    [[-AppServicePlan] <String>]
+   [-AsJob]
+   [-GitRepositoryPath <String>]
+   [-Tag <Hashtable>]
+   [-DefaultProfile <IAzureContextContainer>]
+   [-WhatIf]
+   [-Confirm]
+   [<CommonParameters>]
+   # and then
+   Set-AzWebApp -AssignIdentity $true -Name -ResourceGroupName
+  ```
+    {{< /simpletab >}}
+   </div>
+
+  </div>
+
+</div>

@@ -1,7 +1,7 @@
 baseURL = 'https://www.ghassan.page/'
 languageCode = 'en-us'
 title = "Ghassan's Page"
-theme = 'puppet'
+theme = ["hugo-dynamic-tabs", "puppet"]
 
 copyright = ""
 paginate = 3
