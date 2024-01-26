@@ -86,7 +86,9 @@ So back to our question how HttpClientFactory fixed the problems?
 For 2 minutes `IHttpClientFactory` uses one `HttpClientHandler` to create all `HttpClient` during that 2 minutes.  
 And after 2 minutes, it switch to another handler, and dispose the previous handler and recreate it and add it back to the pool.  
 A new `HttpClientHandler` will create new connections, which means new `DNS` calls, and getting it latest IP addresses.  
-This technique solves both the problems of `Socket Exhaustion` and `DNS rotation`.  
+This technique solves both the problems of `Socket Exhaustion` and `DNS rotation`.   
+Here a diagram from Microsoft to explain the relations between all components:  
+![HttpClientFactory](/img/client-application-code.png)
 
 
 ## How to use IHttpClientFactory:
