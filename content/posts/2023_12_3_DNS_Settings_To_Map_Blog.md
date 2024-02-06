@@ -123,6 +123,11 @@ After you add that value in your DNS domain records, you go back to the host pro
 Each host provider has its own interface to validate that value.  
 > PS: it might take 24 hours for that `TXT` record to take effect.  
 
+### A word about HTTPS
+You don't need to add your own SSL certificate for all three types of hosting. Github pages provides HTTPS even for custom domains, and Azure provides SSL over static website, and blob hosting.  
+But there is a catch for Azure, their built-in certificate doesn't support `Extended Validation` which provides another layer of trust. You need to provide your own certification if you want that feature.  
+In order to provide your own certificate you have to add Azure CDN and host the certificate there.  
+For Github pages, you don't need to add your certificate because Github pages will support that, but in case you want, then you cannot do it with Github pages.  
 
 ## Summary:
 So to summarize, to map to a subdomain (like blog.mysite.com), you just add a `CNAME` record in your DNS provider.  
