@@ -122,7 +122,7 @@ The server will response with json with the token and refresh token, and maybe i
 As I meantioned before, if you use an off-the-shelf authentication service, it will hide the complexity for you, and you don't have to work with previous http workflow.  
 
 From the Auth0 JavaScript client: [Auth0-SPA-JS](https://github.com/auth0/auth0-spa-js).  
-You have to do only three steps:  
+You have to do only four steps:  
 
 1. create an auth0 client:
 ```js
@@ -140,9 +140,7 @@ const auth0 = await createAuth0Client({
 
 2. call login, with will do authorize / login API call
 ```js
-document.getElementById('login').addEventListener('click', async () => {
   await auth0.loginWithRedirect();
-});
 ```
 
 3. in the redirect url, write a handler:
@@ -152,6 +150,23 @@ document.getElementById('login').addEventListener('click', async () => {
   //logged in. you can get the user profile like this:
   const user = await auth0.getUser();
 ```
+
+4. get the token:  
+Any time you need to call an API to authenticate you can get the token
+
+```js
+var accessToken = await auth0.getTokenSilently();
+
+var result = await fetch('<my api url>', {
+  headers: {
+    Authorization: `Bearer ${accessToken}`
+  }
+});
+
+var data = await result.json();
+
+```
+
 
 ### A word about scopes:  
  An API can define a set of permissions that can be used to divide the functionality of that API into smaller chunks. When a API's functionality is chunked into small permission sets, third-party apps can be built to request only the permissions that they need to perform their function. Users and administrators can know what data the app can access.  
