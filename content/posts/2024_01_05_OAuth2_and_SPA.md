@@ -16,9 +16,11 @@ The challenge is you cannot store any type of secrets of credentials in your cod
 To describe the flow briefly, when the SPA requires to get a token it will direct the application to an Authorization Server (AS), which will use that server login page and UI, and the user will run the login process on the AS server website, then that server will return back to the original client website using a callback url passing the token to the SPA.  
 So the client SPA has no idea about the credentials and the client cannot intercept those credentials because the login run on Authorization Server website.  
 
-Let us imagine we have this setup and see how we will do that. I am going to use Auth0 service as an example:
+#### So what is Authorization Code Grant & PKCE
+On SPA and mobile apps, because it is open code and can be interpreted by anyone, it is essential to not to exchange the token directly.  
+So, the laternative is the `AS` will return a encrypted code, hence the PKCE, and that encrypted code will be sent again by the client to get the token. And only the client that initiated the first login request will be able to call with code.  
+`PKCE` (pronounced 'pixy'), provides an encryption mechanism for the communication between SPA and the `AS`.
 
-![The application we are going to implement](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/wgdd12gtmk4lnuegbxaj.jpg)
 
 ## How to configure Auth0
 Before we start writing code, we should configure our API and our SPA application on Auth0.  
@@ -115,8 +117,43 @@ The server will response with json with the token and refresh token, and maybe i
 "scope": "openid profile email"
 }
 ```
- 
- ### A word about scopes:  
+
+## How to use Auth0 JS client:
+As I meantioned before, if you use an off-the-shelf authentication service, it will hide the complexity for you, and you don't have to work with previous http workflow.  
+
+From the Auth0 JavaScript client: [Auth0-SPA-JS](https://github.com/auth0/auth0-spa-js).  
+You have to do only three steps:  
+
+1. create an auth0 client:
+```js
+import { createAuth0Client } from '@auth0/auth0-spa-js';
+
+//with async/await
+const auth0 = await createAuth0Client({
+  domain: '<AUTH0_DOMAIN>',
+  clientId: '<AUTH0_CLIENT_ID>',
+  authorizationParams: {
+    redirect_uri: '<MY_CALLBACK_URL>'
+  }
+});
+```
+
+2. call login, with will do authorize / login API call
+```js
+document.getElementById('login').addEventListener('click', async () => {
+  await auth0.loginWithRedirect();
+});
+```
+
+3. in the redirect url, write a handler:
+
+```js
+  const redirectResult = await auth0.handleRedirectCallback();
+  //logged in. you can get the user profile like this:
+  const user = await auth0.getUser();
+```
+
+### A word about scopes:  
  An API can define a set of permissions that can be used to divide the functionality of that API into smaller chunks. When a API's functionality is chunked into small permission sets, third-party apps can be built to request only the permissions that they need to perform their function. Users and administrators can know what data the app can access.  
  In OAuth 2.0, these types of permission sets are called scopes, and they are presented as string values.  
  The values can be something like this as examples:  financial:read, financial:write, admin, user:write...   
