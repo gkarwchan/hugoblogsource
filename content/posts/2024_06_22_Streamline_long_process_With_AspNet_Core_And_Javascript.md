@@ -67,7 +67,11 @@ public class SystemTextSerializerAttribute : ActionFilterAttribute
 
 ## How the browser receive the data
 The browser will receive the data as chunck of data. If we inspect with chrome dev tool, we can see the following data:  
-![Image Receive 1](/img/stream1.png)
+![Image Receive 1](/img/stream1.png).  
+
+![Image Receive 2](/img/stream1.png).  
+
+![Image Receive 3](/img/stream1.png).  
 
 
 ## How to handle stream in JavaScript
@@ -83,10 +87,50 @@ A simple code will look like:
       const { done, value } = await reader.read();
       if (done) break;
       if (!value) continue;
-      let objAsString = new TextDecoder().decode(value);
-      console.log('the received value:', objAsString);
+      let textValue = new TextDecoder().decode(value);
+      console.log('the received value:', textValue);
     }
   }
 ```
+Because the result is considered as an array, the result will be as follows:
 
-The results will be 
+```bash
+the received value: [1
+the received value: ,2
+the received value: ,3
+...
+the received value: ,9]
+```
+
+To remove the trailling brackets and commas we remove them with regex
+```js
+      let textValue = (new TextDecoder().decode(value)).replace(/^\[/, '').replace(/]$/, '').repace(/^,/, '');
+```
+#### How to report back to the caller:
+
+We can use generator function feature to report to the caller:
+
+```js
+  var postStream = async function* (path) {
+    
+    let response = await fetch(path, { method: "POST", body });
+    const reader = response.body?.getReader();
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      if (!value) continue;
+      let textValue = (new TextDecoder().decode(value)).replace(/^\[/, '').replace(/]$/, '').repace(/^,/, '');
+      yield textValue;
+    }
+  }
+```
+And from the caller:
+
+```js
+  var genFunc = await postStream("path");
+  var valueObj = genFunc.next();
+  while (!valueObj.done) {
+    // do something with valueObj.value
+    valueObj = genFunc.next();
+  }
+```
