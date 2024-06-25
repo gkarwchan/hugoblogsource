@@ -21,21 +21,15 @@ Let us jump into the code right away:
 ```csharp
  [HttpGet("ProcessLongData")]
  [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
- public async IAsyncEnumerable<MyObject> ProcessLongData(string input)
+ public async IAsyncEnumerable<string> ProcessLongData(string input)
  {
   
 
   for (var i = 0; i < 10; i++)
   {
    await Task.Delay(1000);
-   yield return new MyObject { TextData = $"{input}-{i}", IntData = i };
+   yield return i.ToString();
   }
- }
-
- public class MyObject
- {
-  public string TextData { get; set; }
-  public int IntData {get; set;}
  }
 ```
 #### How ASP.NET serialize the result back?
@@ -69,6 +63,13 @@ public class SystemTextSerializerAttribute : ActionFilterAttribute
 }
 ```
 
+
+
+## How the browser receive the data
+The browser will receive the data as chunck of data. If we inspect with chrome dev tool, we can see the following data:  
+![Image Receive 1](/img/stream1.png)
+
+
 ## How to handle stream in JavaScript
 JavaScript has the ability to read stream using the [Stream API](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API/Using_readable_streams).  
 
@@ -83,7 +84,9 @@ A simple code will look like:
       if (done) break;
       if (!value) continue;
       let objAsString = new TextDecoder().decode(value);
-      let obj = JSON.parse(objAsString);
+      console.log('the received value:', objAsString);
     }
   }
 ```
+
+The results will be 
