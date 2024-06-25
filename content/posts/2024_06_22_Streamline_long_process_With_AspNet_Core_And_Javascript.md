@@ -69,9 +69,10 @@ public class SystemTextSerializerAttribute : ActionFilterAttribute
 The browser will receive the data as chunck of data. If we inspect with chrome dev tool, we can see the following data:  
 ![Image Receive 1](/img/stream1.png).  
 
-![Image Receive 2](/img/stream1.png).  
+![Image Receive 2](/img/stream2.png).  
 
-![Image Receive 3](/img/stream1.png).  
+![Image Receive 3](/img/stream3.png).  
+
 
 
 ## How to handle stream in JavaScript
