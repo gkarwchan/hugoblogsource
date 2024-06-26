@@ -31,10 +31,10 @@ rss = true
 # See https://giscus.app/
 [giscus]
 enable = true
-repo = "gkarwchan/hugoblog"
-repo_id = "R_kgDOI9C7aQ"
+repo = "gkarwchan/gkarwchan.github.io"
+repo_id = "R_kgDOK0QUTA"
 category = "General"
-category_id = "DIC_kwDOI9C7ac4CUTNT"
+category_id = "DIC_kwDOK0QUTM4Ccf8h"
 input_position = "top"
 theme = "light_tritanopia"
 lang = "en"
