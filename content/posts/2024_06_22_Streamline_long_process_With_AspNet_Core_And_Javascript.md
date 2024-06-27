@@ -135,3 +135,24 @@ And from the caller:
     valueObj = genFunc.next();
   }
 ```
+
+
+## Host on Azure Web App Windows
+One last thing to mention.  
+If you want to host your webapi application on Azure Web App (App Service) for Windows, then Azure will use IIS to host the application, and IIS has its own buffering.  
+To avoid IIS buffering, you add to the controller's method the following:
+
+```csharp
+ [HttpGet("ProcessLongData")]
+ [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
+ public async IAsyncEnumerable<string> ProcessLongData(string input)
+ {
+  
+  HttpContext.Features.Get<IHttpResponseBodyFeature>()?.DisableBuffering();
+  for (var i = 0; i < 10; i++)
+  {
+   await Task.Delay(1000);
+   yield return i.ToString();
+  }
+ }
+```
