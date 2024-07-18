@@ -156,3 +156,26 @@ To avoid IIS buffering, you add to the controller's method the following:
   }
  }
 ```
+
+
+## Consume IAsyncEnumerable with HttpClient
+To consume IAsyncEnumerable with an HttpClient you can do the following:
+
+```csharp
+public async Task ConsumeStreamData()
+{
+  var url = "url of stream data";
+  using var response = await _httpClient.GetAsync(url, HttpCompletionOption.ResonseHeadersRead);
+  response.EnsureSuccessStatusCode();
+  using var stream = await response.Content.ReadAsStreamAsync();
+  var dataChunks = JsonSerializer.DeserializeAsyncEnumerable<myCustomObject>(stream,
+  new JsonSerializerOptions {
+    PropertyNameCaseInsentive = true,
+    DefaultBufferSize = 200
+  });
+  await foreach (var chunk in dataChunks)
+  {
+    // do something with the data
+  }
+}
+```
