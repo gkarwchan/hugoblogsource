@@ -1,5 +1,5 @@
 +++
-title = "Auth0 and SPA"
+title = "Auth0 Single Sign On and seamless silent authentication"
 date = 2024-05-01T10:41:54-06:00
 short = true
 toc = true
@@ -11,7 +11,29 @@ comment = true
 +++
 
 Auth0 streamlines lots of complexity for you when it comes to authenticate your SPA application.  
-In this article we will talk about the features and details of that functionality.
+In this article we will talk about how Single Sign ON works.
+
+## Auth0 Single Sign On and sessions:
+
+Auth0 provides Single Sign-on through the use of sessions. There are up to three different sessions:  
+1. Local session.
+2. Authorication Server session, if SSO is enabled.
+3. Identity Provider (IdP) session, if the user login through an IdP like Google, Facebook...etc.
+
+## How SSO works:
+
+1. the application will redirect the user to login page on Auth0 Authorization Server.
+2. Auth0 checks to see if there is an existing SSO cookie for the authorization server.
+3. there is no cookie, so the user will be redirect to the login page.
+4. after login, Auth0 will set SSO cookie and redirect the user to our application, returning the ID token.
+5. The user compes back to our application.
+6. the application will redirect to the login page.
+7. Auh0 check for SSO cookie.
+8. Auth0 will find the cookie and update it without the login process.
+
+The developer can check for the SSO session from their application by using Auth0 SDK: [Auth0.js](https://auth0.com/docs/libraries/auth0js), and use `checkSession` method.  
+
+So, there is a redirect to the login page all the time, but Auth0 can hide that redirect and make the process seamless using `Silent Authentication`.
 
 ## Silent authentication
 
