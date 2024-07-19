@@ -3,7 +3,7 @@ title = "Auth0 Single Sign On and seamless silent authentication"
 date = 2024-05-01T10:41:54-06:00
 short = true
 toc = true
-draft = true
+draft = false
 tags = ["security"]
 categories = []
 series = []
@@ -31,16 +31,27 @@ Auth0 provides Single Sign-on through the use of sessions. There are up to three
 7. Auh0 check for SSO cookie.
 8. Auth0 will find the cookie and update it without the login process.
 
-The developer can check for the SSO session from their application by using Auth0 SDK: [Auth0.js](https://auth0.com/docs/libraries/auth0js), and use `checkSession` method.  
+The developer can check for the SSO session from their application by using Auth0 SDK: [Auth0.js](https://auth0.com/docs/libraries/auth0js).
 
-So, there is a redirect to the login page all the time, but Auth0 can hide that redirect and make the process seamless using `Silent Authentication`.
+
+
+So, there is a redirect to the login page all the time, but in `Authorization Code Flow with PKCE` workflow in conjuction with `Silent Authentication` can renew your session without relogin, and redirect.
+
 
 ## Silent authentication
 
-`OpenId Connect` protocol supports a `prompt=none` parameter on the authentication request, which indicate the Authentication Server (`AS`) must not display any user interaction. The Auth0 server will either return a successful token or return an error, in which case the user has to redirect to login.  
-In `Authorization Code Flow with PKCE` in conjuction with Silent Authentication can renew your session without relogin.  
+To get a fresh token with silent authentication, all you have to do is using Auth0 SDK: [Auth0.js](https://auth0.com/docs/libraries/auth0js), you call `checkSession` or `getTokenSilently` on older versions, and the library will do the magic for you.  
+So what that magic is, and how that works?
 
-#### Silent authentication API endpoint
+#### How silent authentication work?
+
+Auth0 used to use cookies to store the Auth0 session to be able to get back the authentication.  
+But modern browsers prevent third-party cookies, therefore Auth0 shifted to use : **`Refresh Token Rotation`**, which provides a secure way for using refresh tokens in SPA while providing end-users with seamless access to resources without the disruption in UX.  
+
+The library using iframe will call the `authorization server` (`AS`) for an endpoint that will try to authenticate silently.  
+
+`OpenId Connect` protocol supports a `prompt=none` parameter on the authentication request, which indicate the Authentication Server (`AS`) must not display any user interaction. The Auth0 server will either return a successful token or return an error, in which case the user has to redirect to login.  
+
 to authenticate using OpenId Connect use the following endpoint:  
 
 ```http
@@ -56,19 +67,14 @@ GET https://{yourDomain}/authorize
     prompt=none
 ```
 
-#### How silent authentication work?
-
-Auth0 used to use cookies to store the Auth0 session to be able to get back the authentication.  
-But modern browsers prevent third-party cookies, therefore Auth0 shifted to use : **`Refresh Token Rotation`**, which provides a secure way for using refresh tokens in SPA while providing end-users with seamless access to resources without the disruption in UX.  
-
-https://auth0.com/docs/authenticate/login/configure-silent-authentication
+Because the library use iframe targetting `AS`then it can check the stored cookies for that server.  
+The above call will either return success, or failure.  
+The failure has `ERROR_CODE` that describe the failure.  
 
 The possible values for ERROR_CODE are defined by the OpenID Connect specification:
 
-Response	Description
-login_required	The user was not logged in at Auth0, so silent authentication is not possible. This error can occur based on the way the tenant-level Log In Session Management settings are configured; specifically, it can occur after the time period set in the Require log in after setting. See Configure Session Lifetime Settings for details.
-consent_required	The user was logged in at Auth0, but needs to give consent to authorize the application.
-interaction_required	The user was logged in at Auth0 and has authorized the application, but needs to be redirected elsewhere before authentication can be completed; for example, when using a redirect rule.
+1. login_required: The user was not logged in at Auth0, so silent authentication is not possible. 
+2. consent_required: The user was logged in at Auth0, but needs to give consent to authorize the application.
+3. interaction_required: The user was logged in at Auth0 and has authorized the application, but needs to be redirected elsewhere before authentication can be completed; for example, when using a redirect rule.
 
-
-https://auth0.com/docs/secure/tokens/token-best-practices
+The library silently will refersh the token for you using [Refresh Token Rotation](https://auth0.com/docs/secure/tokens/refresh-tokens/refresh-token-rotation)
