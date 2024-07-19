@@ -165,7 +165,7 @@ To consume IAsyncEnumerable with an HttpClient you can do the following:
 public async Task ConsumeStreamData()
 {
   var url = "url of stream data";
-  using var response = await _httpClient.GetAsync(url, HttpCompletionOption.ResonseHeadersRead);
+  using var response = await _httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
   response.EnsureSuccessStatusCode();
   using var stream = await response.Content.ReadAsStreamAsync();
   var dataChunks = JsonSerializer.DeserializeAsyncEnumerable<myCustomObject>(stream,
@@ -177,5 +177,47 @@ public async Task ConsumeStreamData()
   {
     // do something with the data
   }
+}
+```
+
+Let's explore that code in details:
+
+#### what is HttpCompleteOption.ResponseHeadersRead:
+
+HttpClient when calling `GetAsync`, `PostAsync` and `SendAsync` by default will start a tcp connection to the server and start stream the response and buffer it into `MemoryStream` until the all data received and then it complete the method.  
+We can change that behavior using the overload `HttpCompleteOption.ResponseHeadersRead`.  
+`HttpCompleteOption` has two options:  
+1. ResponseContentRead: which is the default, which is buffering the response and wait until all data end.
+2. ResponseHeadersRead: which return control to the caller earlier, as soon as the header received.  
+
+##### How to use HttpCompleteOption?
+HttpCompleteOption is provided as overload parameter for `GetAsync` and `SendAsync`.  
+Let us see code with and without HttpCompletionOption: 
+
+```csharp
+public async Task WithoutHttpCompletionOption()
+{
+
+    using HttpResponseMessage response = await httpClient.GetAsync("todos/3");
+    
+    response.EnsureSuccessStatusCode();
+ 
+    var jsonResponse = await response.Content.ReadAsStringAsync();
+
+}
+
+
+public async Task WithHttpCompletionOption()
+{
+    using var response = await _httpClient.GetAsync("http://localhost:58815/books", HttpCompletionOption.ResponseHeadersRead);
+
+    response.EnsureSuccessStatusCode();
+
+    if (response.Content is object)
+    {
+        var stream = await response.Content.ReadAsStreamAsync();
+        var data = await JsonSerializer.DeserializeAsync<List<Book>>(stream);
+        // do something with the data or return it
+    }
 }
 ```
