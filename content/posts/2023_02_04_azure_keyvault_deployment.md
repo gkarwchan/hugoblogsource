@@ -58,7 +58,8 @@ The beauty of this feature is the user who is doing deployment doesn't need to h
 ```
 Microsoft.keyVault/Vaults/deploy/action
 ```
-To assign this permission to the user, it is easier if we create a custom role with this permission and then assign this role to any user want to deploy.  
+The owner or contributor of the key-vault will give the user that permission to the user.  
+It is easier if we create a custom role with this permission and then assign this role to any user want to deploy.  
 First we create a json to represent the definition of the custom role:
 
 ```json
