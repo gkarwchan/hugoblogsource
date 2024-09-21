@@ -1,7 +1,7 @@
 ---
 title: Use Azure Key Vault to retrieve secured parameters during  Azure deployment.
 date: 2023-02-04T20:42:03-07:00
-tags: ["azure", "ci/cd", "security"]
+tags: ["azure", "devops", "security"]
 ---
 
 You have an ARM template to deploy, and you need to pass secure parameters. Instead of storing secure values in the parameter file, you can just retrieve these values from Key Vault.

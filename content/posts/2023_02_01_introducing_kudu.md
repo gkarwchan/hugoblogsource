@@ -1,7 +1,7 @@
 ---
 title: Introducing Kudu, the engine that handle all web application deployment to Azure App Service.
 date: 2023-02-01T20:20:40-07:00
-tags: ["ci/cd", "azure"]
+tags: ["devops", "azure"]
 ---
 
 If you follow any tutorials on Azure App Service, you will find that they use one of five options to deploy a web application to the Azure.  
