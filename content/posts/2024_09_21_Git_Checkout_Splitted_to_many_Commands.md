@@ -71,12 +71,18 @@ git switch -c <new-branch-name>
 
 
 #### git restore
-`git restore` is focusing on restoing files from specific commit, or disregard the changes in staging, or working area.
+`git restore` is focusing on restoing files from specific commit, or disregard the changes in staging, or working area.  
+`restore` will restore the files from `HEAD` content, but without touching the index/stage area, but you can override that as we will describe down:
 
 ```bash
 git restore <file>
-## or restore all files
+# or restore all files from HEAD content without touching index/stage area
+# to compare to checkout, which revert both working tree and stage area
 git restore .
+# to revert the changes in index/stage area only use the following override argument
+git restore . --staged 
+# to revert both working tree and stage area use
+git restore . --staged --worktree # this similar to git checkout .
 ```
 
 Or you can restore to a specific commit 
