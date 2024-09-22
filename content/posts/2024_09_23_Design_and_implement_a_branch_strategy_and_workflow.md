@@ -1,5 +1,5 @@
 +++
-title = "Design and implement Git branching strategies and workflow"
+title = "Design and implement Git branching strategies for CI/CD integration"
 date = 2024-09-23T10:41:54-06:00
 short = true
 toc = true
@@ -10,50 +10,57 @@ series = []
 comment = true
 +++
 
-Adopting a standardized development process for Git workflow, and how it integrate with CI/CD is the first step you should establish in your team before writing one line of code. We are going to cover one major well known workflow called `Trunk-based workflow` that is used by many companies, including Microsoft.  
+Establishing a standardized development process that integrates a Git workflow with Continuous Integration/Continuous Deployment (CI/CD) is crucial before writing any code. This post will explore a widely-used approach: the Trunk-Based Development Workflow, which is adopted by many leading companies, including Microsoft.
 
-# Chose a branching strategy:
+# Choosing a branching strategy:
 
-Every organization should settle on a standard code release process to ensure consistency, and reduce risks. The code release strategy start from adopting Git workflow, and include building CI/CD process and end with building a release strategy.  
-We are going to cover in this post the Git workflow, and start from the the basic steps of the release flow: branch, push, pull request, and merge.
+Every team should adopt a consistent code release process to maintain quality and reduce risks. This starts with selecting a Git workflow, continues through integrating CI/CD, and culminates in defining a release strategy.  
 
-Chosing the right Git workflow for your team can enhance the team effectiveness and increase its productivity. To chose the correct strategy there are some considerations:  
+In this post, we’ll focus on the Git workflow, starting with the basic steps of a typical release flow: creating branches, pushing changes, submitting pull requests, and merging code.  
 
-* Scalability: does this workflow scale when the team expand in size.
-* Undo mistakes: how easy it is to undo mistakes and errors?
-* Overhead works: how much overhead work (like fixing merge conflicts, or waiting for CI/CD process), this workflow will add to the team.
+Choosing the right Git workflow for your team can significantly boost productivity. Consider the following when selecting the best strategy for your team:
 
-# Trunk based workflow:
+* Scalability: Will this workflow scale as the team grows?
+* Error Recovery: How easy is it to recover from mistakes?
+* Overhead: How much additional work, such as resolving merge conflicts or waiting on CI/CD, will the workflow introduce?
 
-The core idea behind the [Trunk-based Development Workflow](https://trunkbaseddevelopment.com/) is that all development work takes place directly on the main branch (often called "trunk" or "master"). This approach emphasizes continuous integration, with developers frequently committing small, incremental changes to the main branch. Continuous integration and automated testing play a crucial role in maintaining code quality and stability.
-It is good to say that Microsoft adopt this workflow for its internal development.  
-Trunk-based workflow is a slight modification on [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow).
+# What is Trunk-Based Development?:
+
+The core principle of [Trunk-based Development Workflow](https://trunkbaseddevelopment.com/) is that all development work happens directly on the main branch (commonly called “trunk” or “master”). This method encourages continuous integration, with developers frequently committing small, incremental changes. Automated testing and integration play a pivotal role in maintaining high code quality.
+
+Notably, Microsoft uses this workflow internally, and it's a slight variation of the [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow).
 
 ### Branching:
 
-Every bug or feature will have its own branch. A developer will create a new branch for each feature or bug is working on.
+For every new feature or bug fix, a developer creates a dedicated branch. Once the work is complete, this branch will be merged into the trunk via a pull request.
 
 ### Pull Request with review policies:
-After the developer finish from their development, they will create a `pull request` to merge it into trunk. No direct check-in into trunk without a PR.  
-This process of allowing merging code into trunk by only PR will protect the code quality, specially if you add more policies, like the PR must be approved by other developers, and all comments in the PR must be resolved, and the PR triggers CI build, and all quality checks (unit tests and code scanning) must pass before the developer can merge its work into the trunk.
+After completing their work, developers submit a pull request (PR) to merge their branch into the trunk. Direct check-ins to the trunk are not permitted—merging must happen through a PR.
+  
+To ensure code quality, additional policies can be enforced on PRs:
 
-### Creating Releases and Release branches:
-When time comes to creating a release and ready for production, we create a `Release branch`.  
-A release branch will be created and will be deployed to production.  
-In case a bug was found in prodution, then the bug will be fixed into the trunk (following the same process of create a bug branch and then create a PR), and after it is merged into trunk, we `cherry-pick` into the release branch.  
+Mandatory code reviews by other developers
+* All PR comments must be resolved
+* CI/CD builds must pass all tests (unit tests, code scanning) before merging
+* This process safeguards the integrity of the codebase while maintaining a consistent flow of changes.
+
+### Releases and Release branches:
+When it’s time to release code to production, a `Release branch` is created. This branch is then deployed to production.
+
+If a bug is found in production, the fix is made on the trunk using the same process: a bug-fix branch is created, a PR is submitted, and after merging into the trunk, the fix is `cherry-picked` into the release branch for deployment.
+
 ![Branch Release](/img/branch-strategy.png)
 
 
 ### Branche policies and permissions:
-The above workflow will allow to add policies to increse the protection, security and quality of the code.
+The Trunk-Based Development workflow allows for the enforcement of policies to enhance security, code quality, and team efficiency.
 
-##### Branch hierarchy and permissions
-We can have a standard hierarchy of branches, and give them permissions, like for example all user created branches will be under folders like `/users` or `/features`. Release branches will be under `/Releases`, and only administrators can create those branches. 
+##### * Branch hierarchy and permissions
+A structured branch hierarchy can help maintain organization and control. For instance, user-created branches could reside in `/users` or `/features`, while release branches live under `/releases`. Permissions can be set accordingly—only administrators would have the authority to create or modify release branches.
 
-##### Branch policies and forcing PR:
-We can add branch policies to enhance the quality of the code by forcing PR to add code to the trunk, and on that PR we can add protection rules, for example:
+##### Enforcing Branch policies:
+To further ensure code quality, the following policies can be applied to the trunk and release branches:
 
-* add mandatory code review: So every PR must be approved by others to allow to merge.
-* add check successful build on PR to allow it to be merged: so we can run CI process and check the quality of that build (unit test or code scanning tools).
-* add CD status on release branches: so create a release branch triggers a CD process to deploy to pre-environment, and can trigger a process of checking performance and stability of the release.
-
+* Mandatory Code Reviews: Every PR must be approved by another developer before it can be merged.
+* Successful Builds: CI processes ensure that a PR’s build passes unit tests or code scans before allowing a merge.
+* CD Automation for Releases: Creating a release branch can trigger automated deployment to a pre-production environment, along with performance and stability checks.
