@@ -48,7 +48,7 @@ git checkout (<commit-hash> | <tag-name>)
 ```
 
 ## Why `checkout` was so overloaded
-In Git the branches tags and commit SHAs, all are under the hood the same thing, which they are `refs` in the log history, so having one command is making sense technically. 
+In Git the branches tags and commit SHAs, all are under the hood the same thing, which they are `refs` (or references) in the log history, so having one command is making sense technically. 
 But from a developer workflow viewpoint (where branch is different than tag), bundling them into one command could cause confusion, especially for newer users. You might ask, "Why does git checkout work in some situations and not others?" For instance, sometimes it works with staged files, sometimes with uncommitted changes, and other times it doesn't unless you commit first.
 
 Because git checkout had to handle so many different tasks, the Git community decided to split its functionality. The command still works for backward compatibility, but now we have two specialized commands that simplify common tasks: git switch and git restore.
