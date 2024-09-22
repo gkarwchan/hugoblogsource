@@ -1,5 +1,5 @@
 +++
-title = "Are you still using `git checkout` for everything? It is time to switch to `gitswitch`"
+title = "Are you still using git checkout for everything? It is time to switch to git switch"
 date = 2024-09-21T10:41:54-06:00
 short = true
 toc = true
@@ -82,7 +82,7 @@ git restore .
 # to revert the changes in index/stage area only use the following override argument
 git restore . --staged 
 # to revert both working tree and stage area use
-git restore . --staged --worktree # this similar to git checkout .
+git restore --source . --staged --worktree # this similar to git checkout .
 ```
 
 Or you can restore to a specific commit 
