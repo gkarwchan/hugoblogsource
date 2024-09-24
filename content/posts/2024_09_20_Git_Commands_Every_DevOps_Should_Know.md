@@ -1,5 +1,5 @@
 +++
-title = "Git commands every DevOps should know"
+title = "Git tools every DevOps should know"
 date = 2024-09-20T18:41:54-06:00
 short = true
 toc = true
@@ -10,32 +10,77 @@ series = []
 comment = true
 +++
 
+As a DevOps who maintain an active Git repo, where hundreds of commits are running everyday, you will need to deal with issues from time to time, and those issues require some good knowledge of git, and some of its tools that will help you in your job.  
+We are going to cover some common issues that the team face while dealing with git, and what tools are used to deal with them.  
+We we cover these issues:  
 
-# Purge a file permenantly from the whole history of the repository
+* delete permenantly files from the whole history.
+* maintain the health of the repository by cleaning its **garbage** from time to time.
+* speed up working with huge repository.
+* spped up dealing with huge files.
+* generate log when it is time for creating a release.
 
-So, someone pushed a file that has secrets, or very large file that was not necessary in our code.  
+
+# Cleaning dead, and unreachable items in your repo.
+
+Similar to how you do `Disk Cleanup` on your computer from time to time to clean dead files that being collected over time, Git repository collect some unreachable items (commits, branches...).  
+The command **`git gc`** which is (Git garbage collection), will do that process.  
+The command will do the following:  
+
+1. Compress objects
+2. Clean up orphan data (like unreachable commits, or branches)
+3. Enhance performance
+
+> Remarkable to know that some commands will do built-in auto `gc`
+> the following commands do that:  
+> 1. git commit
+> 2. git merge
+> 3. git pull
+> 4. git rebase
+
+Although the above commands do built-in cleaning, but it is important from time to time you run it on the repository.  
+Some DevOps run the command though CI/CD after every release.  
+
+# Dealing with large files:
+When adding a file to git, git will add it to its database, and keep lots of metadata and track information on it.
+If the file is huge (gigabytes), then tracking that file in git database will be a costly process.
+That is why git will limit the file size uploaded.
+
+GitHub for example has the following limits depend on your GitHub plan:
+
+
+| Product | Maximum file size |
+| -- | -- |
+| GitHub Free |	2 GB |
+| GitHub Pro | 2 GB |
+| GitHub Team	| 4 GB |
+| GitHub Enterprise Cloud	| 5 GB| 
+
+To keep maintaining those large files, there is an extension tool called [Git Large File Storage](https://git-lfs.com/).
+The tool doesn’t load the file into Git database, but it load it into a separate place, and keep a pointer to the file in the database, and track the pointer instead of the file.  
+
+### How to use it?
+The link above has a downloadable installer for Git LFS. It is a git CLI extension. After you install the above installer, you run the following:  
+
+```bash
+git lfs install
+```
+
+Then you can configure specific extensions to be tracked by LFS.
+
+```bash
+git lfs track "*.pdf"
+```
+So any PDF file will be tracked by LFS.  
+
+# Delete files permenantley from Git history
+
+Someone pushed a file that has secrets, or very large file that was not necessary in our code.  
 We need to delete it, but we need to delete it permenantly from all git history.  
 
 If the file was commited to local repository but was not pushed yet to the remote git provider.  
 
-```bash
-git rm <file-path>
-# in case you need to make a copy from the file before then
-# the above command will delete it from the stage but not from the disk
-git rm --cached <file-path>
-
-# then you do amend, because amend will rewrite the last commit
-git commit --amend
-
-# the previous command will invoke the editor to allow you to edit the commited message.
-# if you don't care to change the commited message and want to reuse it
-# then pass the C (upper C) argument 
-git commit --amend -CHEAD
-
-# the previous command will clear the file from the history of the local repo
-git push
-```
-But what if you already pushed the file to the remote repository? Then you need to use one of the tools:  
+Then you need to use one of the tools:  
 
 * git filter-repo
 * BFG Repo-Cleaner
