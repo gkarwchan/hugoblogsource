@@ -93,10 +93,13 @@ java -jar bfg.jar --delete-files <path to files>
 # or replace text in a file, which will arease all data
 java -jar bfg.jar --replace-text <path to files>
 
+# then clean your local reflog from those orphan entries
+git reflog expire --expire=now --all
+# and run garbage collection to prune all orphan entries from the repository
+$ git gc --prune=now --aggressive
 # then you need to push with force the cleaned repository back
 git push --force
-git reflog expire --expire=now --all
-$ git gc --prune=now
+
 ```
 
 This process alter the repo's history, which means will change the SHAs for that commit you are altering, and will change all its child and dependent commits.  
