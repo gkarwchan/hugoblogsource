@@ -15,8 +15,8 @@ In this post I am going to describe:
 
 ## Introduction
 If you want to learn more about HTTPS and its basic concepts, I wrote two posts about:
-1. [Creating an SSL Certificate]({{ <ref "2016_03_11_Secure_your_application_with_ssl" >}}).
-2. [SSL/TLS terminologies]({{ <ref "2016_04_18_making_sense_of_ssl_rsa_x509_and_csr" > }}) that cover lots of basic knowledge on that subject.  
+1. [Creating an SSL Certificate]({{< ref "2016_03_11_Secure_your_application_with_ssl" >}}).
+2. [SSL/TLS terminologies]({{< ref "2016_04_18_making_sense_of_ssl_rsa_x509_and_csr" >}}) that cover lots of basic knowledge on that subject.  
 I recommend reading them to know the basic and how to implement HTTPS on your web site.  
 After enabling HTTPS on your web site, you should do the following:  
 
