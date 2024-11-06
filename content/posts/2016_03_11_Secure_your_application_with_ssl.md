@@ -1,5 +1,5 @@
 +++
-title = "Secure your web site with SSL"
+title = "Secure your web site with SSL/TLS"
 date = 2016-03-11T08:59:00.002-07:00
 short = true
 toc = true
@@ -9,7 +9,17 @@ series = []
 comment = true
 +++
 
-## What does it mean?
+SSL (Secure Sockets Layer) and its successor, TLS (Transport Layer Security), are cryptographic protocols that secure internet communication by encrypting data between a client (like a browser) and a server.
+
+# How SSL/TLS works?
+SSL/TLS secure communication by:  
+
+* Encryption: Ensures that data transmitted between the client and server cannot be read by third parties.
+* Authentication: Verifies the identity of the server (and sometimes the client), establishing trust.
+* Data Integrity: Guarantees that data has not been altered during transmission.
+
+# How to do it?
+
 In order to secure the web site with SSL, you first need to buy a certificate.  
 A certificate is a document that your website will send back to the browsers as an **`Official identification`** for your web site, and your business.  
 
