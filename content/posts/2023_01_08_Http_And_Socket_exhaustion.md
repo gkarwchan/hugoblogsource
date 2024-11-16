@@ -49,7 +49,7 @@ In Http protocol, when a connection disposed, it will stays in **`TIME_WAIT`** s
 With lots of calls you might use all the ports on the client computer, which lead to the application will hang waiting for a port to be released.  
 That situation is called **`Socket Exhaustion`**.  
 
-## Fixing Socket Exhaustion
+## Fixing Socket Exhaustion and DNS rotation:
 So what if we introduce one instance of Http Client (that is using only one random port), and keep it alive, and re-use it for all calls?  
 This will solve the problem of `Socket Exhaustion`, but we introduce another problem.  
 When we call an API endpoint which has the address: `https://www.myapiservice.com/api/myendpint`, the HttpClient will first call the `DNS` servers to translate "myapiservice.com" to an IP address.  
@@ -69,23 +69,18 @@ Having one HttpClient, will keep the old IP address that was detected on the fir
 
  
 ### How IHttpClientFactory solved the problem?  
-HttpClient internally is creating a connection and doing the calls using a class in .NET called **`SocketsHttpHandler`**.  
-The real work of establishing a connection is happening inside `SocketsHttpHandler` , and the disposing of this handler which is taking **`Time_WAIT`** for 4 minutes to be really released.  
+HttpClientFactory uses an internal class called `SocketsHttpHandler`. The real work of establishing a connection is happening inside `SocketsHttpHandler` , and the disposing of this handler which is taking **`Time_WAIT`** for 4 minutes to be really released.  
 
-HttpClientFactory uses an internal class called `HttpClientHandler`, and it is the same as `SocketsHttpHandler`, which might be confusing, so before we talk what HttpClientFactory is doing, let us explain the difference.  
-
-#### HttpClientHandler vs. SocketsHttpHandler:
-HttpClientHandler was the old handler that HttpClient uses to do the real http communication. After version Core 2.1, the SocketsHttpHandler was introduced, and HttpClient started using the new handler, but HttpClientFactory kept using the old handler HttpClientHandler.  
-But in Core 5.0, HttpClientHandler [was changed to use SocketsHttpHandler internally](https://github.com/dotnet/runtime/blob/f518b2e533ba9c5ed9c1dce3651a77e9a1807b8b/src/libraries/System.Net.Http/src/System/Net/Http/HttpClientHandler.cs#L16). So in reality they are the same, and when you are talking about Core version 5.0 and later both are the same which is SocketsHttpHandler.  
-
+#### One caution about another class : HttpClientHandler
 If you read about IHttpClientFactory you will read that it is using an internal class called HttpClientHandler, and that might create confusion.  
+HttpClientHandler was the old handler that HttpClient uses to do the real http communication. After version Core 2.1, the SocketsHttpHandler was introduced, and in Core 5.0, HttpClientHandler [was changed to use SocketsHttpHandler internally](https://github.com/dotnet/runtime/blob/f518b2e533ba9c5ed9c1dce3651a77e9a1807b8b/src/libraries/System.Net.Http/src/System/Net/Http/HttpClientHandler.cs#L16). So in reality they are the same, and when you are talking about Core version 5.0 and later both are the same which is SocketsHttpHandler.  
 
 So back to our question how HttpClientFactory fixed the problems?  
-`IHttpClientFactory` will create an internal pool of  `HttpClientHandler` and keep them and passing them when create `HttpClient`. So when create or dispose `HttpClient`, `IHttpClientFactory` is using `HttpClientHandler` from its pool.  
-`IHttpClientFactory` rotate between the `HttpClientHandler` in the pool every 2 minutes (the half time of **`WAIT_TIME`**).  
-For 2 minutes `IHttpClientFactory` uses one `HttpClientHandler` to create all `HttpClient` during that 2 minutes.  
+`IHttpClientFactory` will create an internal pool of  `SocketsHttpHandler` and keep them and passing them when create `HttpClient`. So when create or dispose `HttpClient`, `IHttpClientFactory` is using `SocketsHttpHandler` from its pool.  
+`IHttpClientFactory` rotate between the `SocketsHttpHandler` in the pool every 2 minutes (the half time of **`WAIT_TIME`**).  
+For 2 minutes `IHttpClientFactory` uses one `SocketsHttpHandler` to create all `HttpClient` during that 2 minutes.  
 And after 2 minutes, it switch to another handler, and dispose the previous handler and recreate it and add it back to the pool.  
-A new `HttpClientHandler` will create new connections, which means new `DNS` calls, and getting it latest IP addresses.  
+A new `SocketsHttpHandler` will create new connections, which means new `DNS` calls, and getting it latest IP addresses.  
 This technique solves both the problems of `Socket Exhaustion` and `DNS rotation`.   
 Here a diagram from Microsoft to explain the relations between all components:  
 ![HttpClientFactory](/img/client-application-code.png)
@@ -150,6 +145,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
+
 How to use that?
 
 ```csharp
@@ -212,7 +208,7 @@ And then use it
 public class MyController : ControllerBase
 {
     private readonly MyFinancialClient _client;
-    public MyController (MyFinancialClient factory) 
+    public MyController (MyFinancialClient client) 
     {
         _client = client;
     }
