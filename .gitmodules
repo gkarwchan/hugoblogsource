@@ -4,3 +4,6 @@
 [submodule "themes/puppet"]
 	path = themes/puppet
 	url = git@github.com:gkarwchan/hugo-theme-puppet.git
+[submodule "public"]
+	path = public
+	url = git@github.com:gkarwchan/gkarwchan.github.io.git
