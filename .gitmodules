@@ -1,6 +1,9 @@
-[submodule "themes/puppet"]
-	path = themes/puppet
-	url = https://github.com/roninro/hugo-theme-puppet.git
 [submodule "themes/hugo-dynamic-tabs"]
 	path = themes/hugo-dynamic-tabs
 	url = https://github.com/rvanhorn/hugo-dynamic-tabs
+[submodule "themes/puppet"]
+	path = themes/puppet
+	url = git@github.com:gkarwchan/hugo-theme-puppet.git
+[submodule "public"]
+	path = public
+	url = git@github.com:gkarwchan/gkarwchan.github.io.git
