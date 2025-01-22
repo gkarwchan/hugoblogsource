@@ -10,7 +10,13 @@ series = []
 comment = true
 +++
 
-A self-signed certificate is a type of SSL/TLS certificate that is generated and signed by the individual or organization that owns it, rather than being issued by a trusted Certificate Authority (CA). It is used inside development process to use https on your development server or on developer machine.
+A self-signed certificate is a type of SSL/TLS certificate that is generated and signed by the individual or organization that owns it, rather than being issued by a trusted Certificate Authority (CA).  
+For development process we need a certificate for the host `localhost`, and be stored in the certificate store which vary depends on the operating system.  
+To generate and use the certificate do the following two steps:  
+
+1. generate the certificate
+2. store the certificate in the certificate store which vary depends on the operating system.
+
 
 # Generate self-signed :
 We will see how to generate self-signed certificate using:  
@@ -23,6 +29,7 @@ We will see how to generate self-signed certificate using:
 ## With .NET Core tool:
 
 The .NET Core SDK includes an HTTPS development certificate, and it works with `Kestrel` and `IIS express`.  
+You need to just trust the certificate to be stored in the certificate store.  
 You need first to trust it:  
 
 ```bash
@@ -33,7 +40,7 @@ dotnet dev-certs https --trust
 dotnet dev-certs https --check --trust
 
 ## the following will check if there is a certificate, 
-## if not, it will create one
+## if not or expired, it will create one
 dotnet dev-certs https
 ```
 
@@ -96,3 +103,17 @@ npx http-server -S -C server.cert -K server.key -p 8080
 mkcert: https://github.com/FiloSottile/mkcert
 This tool does more to create certificate. It create a local **`CA`** (Certificate Authority), and generate a certificate and store it in the system store, and one more benefit, it store the certificate in firefox store, where the above commands will not work with firefox and you have to create a policy file to trust the generated certificate.
 
+# Certificate store and browsers
+Certificate store different on different operating system.  
+
+## On Windows
+In Windows the certificate is stored in the current user certificate store (the Windows registry). You can access it by running Microsoft Management Console (MMC) and add `certificate` snap-in.
+
+## Firefox browser
+Firefox browser doesn't rely on the operating system, and it uses its own store.  
+To use the Windows store we can either configure Firefox to trust certificates trusted on Windows, or we create policies to import the Windows certificate store into Firefox.  
+For both approach [refer to this](https://support.mozilla.org/en-US/kb/setting-certificate-authorities-firefox).
+
+## On Linux
+
+When ASP.Net Core development certificate is trused, it is exported to a folder in the current user's home directory, and you need to set the `SSL_CERT_DIR` environment varialbe to that location.  
