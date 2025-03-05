@@ -1,5 +1,5 @@
 +++
-title = "Azure Artifacts Credential Provider"
+title = "Managing Credentials for Azure Artifacts"
 date = 2024-12-17T18:41:54-06:00
 short = true
 toc = true
@@ -10,19 +10,18 @@ series = []
 comment = true
 +++
 
-When you store your artifacts (NuGet, NPM, Docker...) inside your private Azure Artifacts, you need to use credentials to pull those artifacts.  
-You can require getting those artifacts from different tools that do your build: dotnet, nuget, msbuild, visual studio....  
-In order to automate the aquisition of credentials needed from all these different tools, Microsoft provides a unified tool to automate aquisition those credentials: **Azure Artifacts Credential Provider".  
+When storing your private artifacts (NuGet, NPM, Docker, etc.) in Azure Artifacts, authentication is required to access them. Various tools such as dotnet, nuget, msbuild, and Visual Studio may need to retrieve these artifacts during the build process. To simplify credential management across these tools, Microsoft provides the Azure Artifacts Credential Provider.
 
-# Introduction & Underlying Technology.
-Because artifacts are required when you need NuGet packages, and you need to preform NuGet operation, which will require you to authenticate, so the **Credential Provider** is a NuGet plugin used by NuGet client.  
-The NuGet client can be either:  
+# Introduction & Underlying Technology
+Since accessing NuGet packages requires authentication, Microsoft provides the Credential Provider, a NuGet plugin that automates credential acquisition for NuGet clients, including:
+
 * dotnet.exe
 * nuget.exe
 * msbuild.exe
 * Visual Studio
 
-Microsoft provides a cross platform authentication tool, the tool is built as a plugin based on [NuGet corss platform Plugins](https://learn.microsoft.com/en-us/nuget/reference/extensibility/nuget-cross-platform-plugins) model, and follows the same principal and architecture of another plugin, which is NuGet authentication plugin.  
+The Credential Provider is a cross-platform authentication tool built on [the NuGet Cross-Platform Plugins model](https://learn.microsoft.com/en-us/nuget/reference/extensibility/nuget-cross-platform-plugins). It follows the same principles and architecture as the NuGet Authentication Plugin.  
+
 Let's talk about those underlying technologies:    
 
 ### NuGet Cross Platform Plugins Model:
@@ -30,7 +29,7 @@ In NuGet 4.0+ a new plugin extensibility model was designed.
 The plugins are self-contained executables (runnable in .NET core world), that the NuGet client launch in a separate process.  
 
 > "Why .NET Core?  
-Because it is a cross platform running host environment."
+NET Core enables cross-platform execution, making it an ideal runtime environment for the plugins."
 
 ### NuGet Cross Platform Authentication Plugin.
 NuGet feeds and providers could be secured storage that require authentication like: 
@@ -41,8 +40,7 @@ NuGet feeds and providers could be secured storage that require authentication l
 This plugin was built to provide authentication service for all the NuGet clients for all types of feeds.  
 
 ### Azure Artifact Cernential provider
-This tool was built on the same principals and technologies as the above Nuget Cross-plat Authentication Plugin.  
-By describing those principals we can understand how the Azure artifcats Credential provider works.  
+The Azure Artifacts Credential Provider builds upon the same principles and technologies as the NuGet Authentication Plugin. By understanding these underlying technologies, we can better grasp how the Azure Artifacts Credential Provider operates.
 
 # How NuGet Plugin works
 The high level workflow can be described as:
@@ -56,10 +54,10 @@ A convention based plugin discovery was added in Plguin version 2.0, and it is b
 We are going to list the plugin discovery rules by its priority.  
 
 1. Environment variables:
-If an environment variable `NUGET_PLUGIN_PATHS` exist then it takes priority. The environment variable should contains the full path of the executables exe in .NET framework, or the .dll in .NET Core.
+If `NUGET_PLUGIN_PATHS` is set then it takes precedence. The variable should contains the full path of the executables exe in .NET framework, or the .dll in .NET Core.
 2. User-Location: the user location is: 
-    1. for .NET Core: %UserProfile%/.nuget/plugins/netcore
-    2. for .NET Framework: %UserProfile%/.nuget/plugins/netfx
+    1. for .NET Core: `%UserProfile%/.nuget/plugins/netcore`
+    2. for .NET Framework: `%UserProfile%/.nuget/plugins/netfx`
 ```
 .nuget
     plugins
@@ -82,8 +80,8 @@ The usage depends on what tool is using it.
 With all tools, on its first usage the plugin will aquire a token and then store it in a cache location, and all subsequent calls will check if that store has a valid token and use it.  
 The credential cache location is:  
 
-* windows: $env:UserProfile\AppData\Local\MicrosoftCredentialProvider
-* Linux\MAC: $HOME/.local/share/MicrosoftCredentialProvider/
+* windows: `$env:UserProfile\AppData\Local\MicrosoftCredentialProvider`
+* Linux\MAC: `$HOME/.local/share/MicrosoftCredentialProvider/`
 
 ### dotnet
 dotnet is not an interactive tool by default, so on the first time usage you need to inforce the interactive using the following command:
