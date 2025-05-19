@@ -1,6 +1,6 @@
 +++
 title = "Simplify Jupyter Projects with Docker"
-date = 2025-05-19T18:41:54-06:00
+date = 2025-05-18T18:41:54-06:00
 short = true
 toc = true
 draft = false
