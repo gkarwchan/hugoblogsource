@@ -16,6 +16,9 @@ We can use **Conda** as well, and I will show how, but presonally I prefer Docke
 
 ## Create an isolated evivronment for each project
 
+I had a [previous post]({{< relref 2018_08_22_Python_Virtual_Environments >}}) on how to setup virtual environments using **pipevn**, and **virtualenv**.  
+But since that time, I switched to use mostly **conda** or **docker** specially for Jupyter notebooks.  
+
 Conda offers managing virtual environments, and if you want a tool just to create virtual environments, and install packages, then in my opinion, Conda is the best between others uv, venv, virtualenv, pipenv ...etc.  
 Docker offers the same level of environment isolation as virtual environments, but with several added benefits:
 
@@ -101,6 +104,18 @@ and then you can use it as follows:
 conda env create -f jupyter-template.yaml -n my-new-env
 ```
 
+## Another alternative: Python docker:
+Another alternative, is just using python docker image/container, and create a new container for each project:
+
+```
+docker run -it --rm python:3.11 bash
+```
+
+## Other virtual environment tools:
+Although there are other virtual environment tools, like uv, venv, virtualenv, poetry.  
+Some of them are more for packaging production code, like **poetry**, and some are mimicking npm like 
+**pipenv**, and some of them are fast like **uv**. But personally I think Conda (specially miniconda) is the easiest to use.  
+You can get more [here]({{< relref 2018_08_22_Python_Virtual_Environments >}}).  
 
 ## Conclusion
 With this setup, you can quickly spin up isolated environments for your Jupyter projects without redundant installs or configurations.
