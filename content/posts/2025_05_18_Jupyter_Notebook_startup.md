@@ -17,6 +17,7 @@ We can use **Conda** as well, and I will show how, but presonally I prefer Docke
 ## Create an isolated evivronment for each project
 
 I had a [previous post]({{< relref 2018_08_22_Python_Virtual_Environments >}}) on how to setup virtual environments using **pipevn**, and **virtualenv**.  
+And I had this [post]({{< relref 2023_12_20_Conda_most_importants_commands >}}) about conda.  
 But since that time, I switched to use mostly **conda** or **docker** specially for Jupyter notebooks.  
 
 Conda offers managing virtual environments, and if you want a tool just to create virtual environments, and install packages, then in my opinion, Conda is the best between others uv, venv, virtualenv, pipenv ...etc.  
