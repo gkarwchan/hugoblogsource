@@ -2,7 +2,6 @@
 title: "Azure PowerShell Scripts Collection"
 date: 2025-07-11
 tags: ["azure", "dev tools", "devops"]
-menu: false
 hidden: true
 ---
 
