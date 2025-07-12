@@ -21,4 +21,4 @@ Here's a collection of useful PowerShell scripts for various automation tasks.
 * [KeyVault - List secrets](/scripts/ListSecrets.ps1)
 * [KeyVault - Assign User as KeyVault Administrator](/scripts/assignRoleAdmintoKeyVault.ps1)
 * [KeyVault - Add Secret](/scripts/KeyVault_AddSecret.ps1)
-* [KeyVault - List Secrets](scripts/KeyVault_ListSecrets.ps1)
+* [KeyVault - List Secrets](/scripts/KeyVault_ListSecrets.ps1)
