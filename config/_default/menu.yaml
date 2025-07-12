@@ -3,9 +3,9 @@ main:
     name: "Home"
     url: "/"
     weight: -100
-  - identifier: "archive"
-    name: "Archive"
-    url: "/archive/"
+  - identifier: "azurePowerShell"
+    name: "Azure PowerShell"
+    url: "/azurePowerShell/"
     weight: 10
   - identifier: "about"
     name: "About"
