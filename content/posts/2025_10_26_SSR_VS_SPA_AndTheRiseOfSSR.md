@@ -50,7 +50,7 @@ On the client side, SPA frameworks like React and Vue are still used. User inter
 
 The key difference is in the initial rendering of the application. After that first render, you can choose what runs on the client or server through routing configuration.
 
-In simple words: **It is a hybrid approach.**
+In simple words: **It is a hybrid approach.**, and it combines the best of the two worlds.
 
 ## Why SSR Is Rising?
 The shift to SSR is driven by tangible benefits that directly impact business metrics:  
@@ -98,4 +98,6 @@ With a dedicated server handling SSR, you can store secrets server-side where th
 * Control access to routes and data at the server level
 
 The security posture of SSR applications is fundamentally stronger because you have a trusted server layer between your users and your backend services.
+
+
 
