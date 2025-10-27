@@ -1,6 +1,6 @@
 +++
 title = "SPA vs. SSR: The Rise of Server-Side Rendering"
-date = 2025-10-26T18:41:54-06:00
+date = 2025-10-25T18:41:54-06:00
 short = true
 toc = true
 draft = false
