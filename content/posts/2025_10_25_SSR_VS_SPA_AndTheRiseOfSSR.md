@@ -77,6 +77,10 @@ The final JavaScript bundle is smaller, and most rendering happens on the server
 
 # Extra technical details for consideration:
 
+### Switch to SPA is easy:
+As we said that the new SSR can by a hybrid approach where we combine both worlds SSR and SPA. And in fact most famous SSR frameworks like Next.js and Nuxt.js support an option to generate SPA only production version.  
+If you chose a hybrid approach, then you can control what routes are served from client side, or server side from the configuration of routing.
+
 ### Dockerization and SSR:
 SSR requires hosting and serving from a web server, which means you need either to serve it from the same server that hosts your API services, or you need a separate web server.
 
