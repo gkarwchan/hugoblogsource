@@ -19,8 +19,8 @@ HTTP request smuggling is a technique where an attacker crafts a single HTTP req
 ### Why Does This Happen?
 Modern web applications aren't just a single server sitting in a closet somewhere. They typically have multiple layers working together:
 
-Front-end systems: Reverse proxies, load balancers, firewalls, Content Delivery Networks (CDNs), Web Application Firewalls (WAFs)
-Back-end systems: The actual web application servers running your code
+* Front-end systems: Reverse proxies, load balancers, firewalls, Content Delivery Networks (CDNs), Web Application Firewalls (WAFs).  
+* Back-end systems: The actual web application servers running your code.
 
 These systems need to communicate efficiently, and they do so by reusing HTTP connections. But to reuse a connection, each system needs to know exactly where one request ends and the next one begins.
 HTTP provides two main ways to specify request boundaries:
