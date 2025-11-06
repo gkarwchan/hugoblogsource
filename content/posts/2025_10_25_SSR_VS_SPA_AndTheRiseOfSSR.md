@@ -10,7 +10,6 @@ series = []
 comment = true
 +++
 
-# Introduction
 The landscape of web development has undergone a dramatic shift over the past decade. Single Page Applications (SPAs) dominated the 2010s, promising rich, app-like experiences in the browser. But today, we're witnessing a renaissance of Server-Side Rendering (SSR). This isn't a step backward—it's an evolution that combines the best of both worlds.  
 
 # The SPA benefits

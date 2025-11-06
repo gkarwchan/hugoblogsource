@@ -10,7 +10,6 @@ series = []
 comment = true
 +++
 
-# Introduction
 
 The JavaScript ecosystem has undergone a significant architectural shift in recent years. As applications grow more complex. Shifting away from two opposite architecure patterns:  
 * Massive monolithic application

@@ -10,7 +10,6 @@ series = []
 comment = true
 +++
 
-# Introduction
 If you've been following cybersecurity news lately, you've probably heard about [Microsoft HTTP request smuggling vulnerability CVE-2025-55315](https://www.microsoft.com/en-us/msrc/blog/2025/10/understanding-cve-2025-55315) making headlines. But what exactly is HTTP request smuggling, and why should you care? Let's break it down in plain English.
 
 # What Is HTTP Request Smuggling?
