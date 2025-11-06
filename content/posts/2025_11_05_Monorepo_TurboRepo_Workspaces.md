@@ -14,9 +14,11 @@ comment = true
 
 The JavaScript ecosystem has undergone a significant architectural shift in recent years. As applications grow more complex. Shifting away from two opposite architecure patterns:  
 * Massive monolithic application
-* or chaos of dozen separate repos.
+* or chaos of dozen separate repos.  
+
 A new rising pattern is gaining more ground in modern JavaScript applications.  
 Monorepo pattern, where a single repo for all the code base, but at the same time separate and independent modules, which combine the best of two worlds:  
+
 1. Independent development & testing for each module.
 2. Having all code together, making solving dependencies, and reducing the size, time and effor of solving dependencies between these independant modules.
 
